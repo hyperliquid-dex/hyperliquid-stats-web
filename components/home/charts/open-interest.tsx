@@ -20,7 +20,7 @@ import {
   tooltipFormatterCurrency,
   tooltipFormatterDate,
 } from '../../../helpers';
-import { getTokenHex } from '../../../constants/tokens';
+import { getTokenColor } from '../../../constants/tokens';
 import { open_interest } from '../../../constants/api';
 import { useIsMobile } from '@/hooks/isMobile';
 
@@ -169,7 +169,7 @@ export default function VolumeChart() {
                 dataKey={coinName}
                 dot={false}
                 name={coinName.toString()}
-                stroke={getTokenHex(coinName.toString())}
+                stroke={getTokenColor(coinName.toString())}
                 key={'open-i-rate-line-' + i}
               />
             );

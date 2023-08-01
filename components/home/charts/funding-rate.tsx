@@ -20,7 +20,7 @@ import {
   formatterPercent,
   tooltipFormatterDate,
 } from '../../../helpers';
-import { getTokenHex } from '../../../constants/tokens';
+import { getTokenColor } from '../../../constants/tokens';
 import { funding_rate } from '../../../constants/api';
 
 const REQUESTS = [funding_rate];
@@ -191,7 +191,7 @@ export default function FundingRate() {
                 dataKey={coinName.toString()}
                 dot={false}
                 name={coinName.toString()}
-                stroke={getTokenHex(coinName.toString())}
+                stroke={getTokenColor(coinName.toString())}
                 key={'funding-rate-line-' + i}
               />
             );

@@ -20,7 +20,7 @@ import {
   xAxisFormatter,
   formatterPercent,
 } from '../../../helpers';
-import { getTokenHex } from '../../../constants/tokens';
+import { getTokenColor } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
 
 const REQUESTS = [liquidity_by_coin];
@@ -292,7 +292,7 @@ export default function Liquidity() {
                 type='monotone'
                 dataKey={`${coinName}`}
                 name={coinName.toString()}
-                stroke={getTokenHex(coinName.toString())}
+                stroke={getTokenColor(coinName.toString())}
                 key={i}
                 dot={false}
               />
