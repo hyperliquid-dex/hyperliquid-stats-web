@@ -23,7 +23,7 @@ import {
   yaxisFormatterNumber,
   yaxisFormatterPercent,
 } from '../../../helpers';
-import { getTokenColor } from '../../../constants/tokens';
+import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
   cumulative_new_users,
   daily_unique_users,
@@ -71,7 +71,7 @@ const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_b
 
 export default function UniqueUsers() {
   const [isMobile] = useIsMobile();
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [coinKeys, setCoinKeys] = useState<any[]>([]);

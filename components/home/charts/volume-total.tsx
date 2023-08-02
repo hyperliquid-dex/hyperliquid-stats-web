@@ -23,14 +23,14 @@ import {
   tooltipLabelFormatter,
 } from '../../../helpers';
 import { total_volume } from '../../../constants/api';
-import { getTokenColor } from '@/constants/tokens';
+import { getTokenColor, initialTokensSelectedWithOther } from '@/constants/tokens';
 
 const REQUESTS = [total_volume];
 
 export default function TotalVolumeChart() {
   const [isMobile] = useIsMobile();
   const [formattedData, setFormattedData] = useState<any[]>([]);
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
   const [coins, setCoins] = useState<string[]>([]);
   const [dataTotalVolume, loading, error] = useRequest(REQUESTS[0], [], 'chart_data');
 

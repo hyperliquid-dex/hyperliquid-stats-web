@@ -20,7 +20,7 @@ import {
   xAxisFormatter,
   formatterPercent,
 } from '../../../helpers';
-import { getTokenColor } from '../../../constants/tokens';
+import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
 
 const REQUESTS = [liquidity_by_coin];
@@ -40,7 +40,7 @@ export default function Liquidity() {
   const [coinKeys10000, setCoinKeys10000] = useState<any[]>([]);
 
   const [dataMode, setDataMode] = useState<'0' | '1000' | '3000' | '10000'>('0');
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
 
   const [dataLiqudity, loadingLiqudity, errorLiqudity] = useRequest(REQUESTS[0], [], 'chart_data');
   const loading = loadingLiqudity;

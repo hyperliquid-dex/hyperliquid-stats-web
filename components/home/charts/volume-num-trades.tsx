@@ -29,7 +29,7 @@ import {
   yaxisFormatterNumber,
   xAxisFormatter,
 } from '../../../helpers';
-import { getTokenColor } from '../../../constants/tokens';
+import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
   cumulative_trades,
   daily_trades,
@@ -48,7 +48,7 @@ const REQUESTS = [
 
 export default function VolumeChart() {
   const [isMobile] = useIsMobile();
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'USER'>('COINS');
   const [formattedDataCoins, setFormattedDataCoins] = useState<any[]>([]);

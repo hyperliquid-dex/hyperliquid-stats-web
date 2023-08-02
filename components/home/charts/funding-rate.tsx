@@ -20,7 +20,7 @@ import {
   formatterPercent,
   tooltipFormatterDate,
 } from '../../../helpers';
-import { getTokenColor } from '../../../constants/tokens';
+import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { funding_rate } from '../../../constants/api';
 
 const REQUESTS = [funding_rate];
@@ -35,7 +35,7 @@ export default function FundingRate() {
     [],
     'chart_data'
   );
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
 
   const loading = loadingFundingRate;
   const error = errorFundingRate;

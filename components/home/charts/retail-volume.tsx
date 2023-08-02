@@ -26,7 +26,7 @@ import {
   yaxisFormatter,
   xAxisFormatter,
 } from '../../../helpers';
-import { getTokenColor } from '../../../constants/tokens';
+import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
   cumulative_usd_volume,
   daily_usd_volume,
@@ -50,7 +50,7 @@ export default function RetailVolumeChart() {
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN'>('COINS');
   const [formattedDataCoins, setFormattedDataCoins] = useState<any[]>([]);
   const [formattedDataMargin, setFormattedDataMargin] = useState<any[]>([]);
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
   const [coinKeys, setCoinKeys] = useState<any[]>([]);
   const [dataCumulativeUsdVolume, loadingCumulativeUsdVolume, errorCumulativeUsdVolume] =
     useRequest(REQUESTS[0], [], 'chart_data');

@@ -1,5 +1,9 @@
 import * as CryptoJS from 'crypto-js';
 
+
+export const initialTokensSelected = ['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE']; 
+export const initialTokensSelectedWithOther = ['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']; 
+
 export function getTokenColor(inputString: string): string {
     if (inputString == "Other") {
       return "pink";
@@ -12,12 +16,3 @@ export function getTokenColor(inputString: string): string {
     
     return "#" + color;
 }
-
-// export const getTokenColor = (token: string) => {
-//   let char_sum = 0;
-//   for (let char of token) {
-//     char_sum += char.charCodeAt(0); 
-//   }
-//   char_sum %= COLORS.length; 
-//   return COLORS[char_sum]; 
-// };
