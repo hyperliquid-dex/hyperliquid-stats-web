@@ -84,7 +84,6 @@ function ChartWrapper(props: any) {
                 w={{ xs: '100%', md: '100%' }}
                 display='flex'
                 justifyContent={{ xs: 'flex-start', md: 'flex-end' }}
-                mt={controls && controls.toggles && controls.toggles.length && '2'}
                 mb='1rem'
               >
                 {isMobile ? (
@@ -109,7 +108,7 @@ function ChartWrapper(props: any) {
                     rightIcon={<ChevronDownIcon />}
                     variant='primary'
                     fontSize={'14px'}
-                    fontWeight={'bold'}
+                    size='sm'
                   >
                     Select coins
                   </MenuButton>

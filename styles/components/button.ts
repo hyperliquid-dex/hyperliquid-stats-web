@@ -2,7 +2,7 @@ import { lighten } from 'polished';
 
 const Button = {
   baseStyle: {
-    fontWeight: '600',
+    fontWeight: '400',
     borderRadius: '24px',
     letterSpacing: '1px',
     padding: '1rem 1rem',
