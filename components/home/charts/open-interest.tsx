@@ -20,6 +20,8 @@ import {
   tooltipFormatterCurrency,
   tooltipFormatterDate,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { getTokenColor } from '../../../constants/tokens';
 import { open_interest } from '../../../constants/api';
 import { useIsMobile } from '@/hooks/isMobile';
@@ -130,13 +132,6 @@ export default function VolumeChart() {
       formatData();
     }
   }, [loading]);
-
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
-  };
 
   const coinSelectors = coinKeys
     .map((coinKey: string) => {

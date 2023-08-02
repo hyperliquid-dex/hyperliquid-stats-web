@@ -31,6 +31,8 @@ import {
   tooltipFormatterCurrency,
   tooltipFormatterDate,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
   cumulative_liquidated_notional,
@@ -288,13 +290,6 @@ export default function LiquidatorChart() {
     }).cumulativePnl;
 
     return [-1 * Math.abs(maxCumulativePnl) * 1.1, Math.abs(maxCumulativePnl) * 1.1];
-  };
-
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
   };
 
   const coinSelectors = coinKeys

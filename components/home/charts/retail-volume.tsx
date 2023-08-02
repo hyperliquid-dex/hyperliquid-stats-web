@@ -26,6 +26,8 @@ import {
   yaxisFormatter,
   xAxisFormatter,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
   cumulative_usd_volume,
@@ -238,13 +240,6 @@ export default function RetailVolumeChart() {
       formatData(coinsSelected);
     }
   }, [loading, error]);
-
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
-  };
 
   const coinSelectors = coinKeys
     .map((coinKey: string) => {

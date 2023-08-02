@@ -20,6 +20,8 @@ import {
   xAxisFormatter,
   formatterPercent,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
 
@@ -214,13 +216,6 @@ export default function Liquidity() {
       : dataMode === '3000'
       ? coinKeys3000
       : coinKeys10000;
-
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
-  };
 
   const coinSelectors = coinKeys
     .map((coinKey: string) => {

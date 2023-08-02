@@ -29,6 +29,8 @@ import {
   yaxisFormatterNumber,
   xAxisFormatter,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
   cumulative_trades,
@@ -233,12 +235,6 @@ export default function VolumeChart() {
     }
   }, [loading, dataMode]);
 
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
-  };
 
   const coinSelectors = coinKeys
     .map((coinKey: string) => {

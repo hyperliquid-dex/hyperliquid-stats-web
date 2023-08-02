@@ -22,6 +22,8 @@ import {
   tooltipFormatterCurrency,
   tooltipLabelFormatter,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { total_volume } from '../../../constants/api';
 import { getTokenColor, initialTokensSelectedWithOther } from '@/constants/tokens';
 
@@ -110,13 +112,6 @@ export default function TotalVolumeChart() {
       formatData(coinsSelected);
     }
   }, [loading, error]);
-
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
-  };
 
   const coinSelectors = coins
     .map((coinKey: string) => {

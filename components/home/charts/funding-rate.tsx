@@ -20,6 +20,8 @@ import {
   formatterPercent,
   tooltipFormatterDate,
 } from '../../../helpers';
+import { coinSelectorsSort } from "../../../helpers/utils"; 
+
 import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { funding_rate } from '../../../constants/api';
 
@@ -113,13 +115,6 @@ export default function FundingRate() {
       formatData();
     }
   }, [loading, coinsSelected]);
-
-  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-    if (a.isChecked !== b.isChecked) {
-      return a.isChecked ? -1 : 1;
-    }
-    return a.name.localeCompare(b.name);
-  };
 
   const coinSelectors = coinKeys
     .map((coinKey: string) => {
