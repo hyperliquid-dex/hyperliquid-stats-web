@@ -23,7 +23,7 @@ import {
   yaxisFormatterNumber,
   yaxisFormatterPercent,
 } from '../../../helpers';
-import { coinSelectorsSort } from "../../../helpers/utils"; 
+import { createCoinSelectorsWithFormatArg } from "../../../helpers/utils"; 
 
 import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
@@ -176,31 +176,7 @@ export default function UniqueUsers() {
     }
   }, [loading]);
 
-  const coinSelectors = coinKeys
-    .map((coinKey: string) => {
-      return {
-        name: coinKey,
-        event: () =>
-        {
-          setCoinsSelected((coinsSelected) => {
-            let newCoinsSelected = coinsSelected;
-            if (coinsSelected.includes(coinKey)) {
-              newCoinsSelected = coinsSelected.filter((e) => {
-                return e !== coinKey;
-              });
-            } else {
-              newCoinsSelected.pop(); 
-              newCoinsSelected.push(coinKey);
-              newCoinsSelected.push('Other'); 
-            }
-            formatData(newCoinsSelected); 
-            return newCoinsSelected;
-          });
-        },
-        isChecked: coinsSelected.includes(coinKey),
-      };
-    })
-    .sort((a: CoinSelector, b: CoinSelector) => coinSelectorsSort(a, b));
+  const coinSelectors = createCoinSelectorsWithFormatArg(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper

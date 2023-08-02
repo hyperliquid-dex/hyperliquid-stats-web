@@ -20,7 +20,7 @@ import {
   xAxisFormatter,
   formatterPercent,
 } from '../../../helpers';
-import { coinSelectorsSort } from "../../../helpers/utils"; 
+import { createCoinSelectors } from "../../../helpers/utils"; 
 
 import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
@@ -217,27 +217,8 @@ export default function Liquidity() {
       ? coinKeys3000
       : coinKeys10000;
 
-  const coinSelectors = coinKeys
-    .map((coinKey: string) => {
-      return {
-        name: coinKey,
-        event: () =>
-          setCoinsSelected((coinsSelected) => {
-            let newCoinsSelected = coinsSelected;
-            if (coinsSelected.includes(coinKey)) {
-              newCoinsSelected = coinsSelected.filter((e) => {
-                return e !== coinKey;
-              });
-            } else {
-              newCoinsSelected.push(coinKey);
-            }
-            formatData();
-            return newCoinsSelected;
-          }),
-        isChecked: coinsSelected.includes(coinKey),
-      };
-    })
-    .sort((a: CoinSelector, b: CoinSelector) => coinSelectorsSort(a, b));
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
+
   return (
     <ChartWrapper
       title='Slippage % by Trade Size'

@@ -20,7 +20,6 @@ import {
   tooltipFormatterCurrency,
   tooltipFormatterDate,
 } from '../../../helpers';
-import { coinSelectorsSort } from "../../../helpers/utils"; 
 
 import { getTokenColor } from '../../../constants/tokens';
 import { open_interest } from '../../../constants/api';
@@ -32,7 +31,6 @@ export default function VolumeChart() {
   const [isMobile] = useIsMobile();
   const [hasSetCoinsSelected, setHasSetCoinsSelected] = useState<boolean>(false);
   const [coinKeys, setCoinKeys] = useState<any[]>([]);
-  const [coinsSelected, setCoinsSelected] = useState<string[]>([]);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dataOpenInterest, loadingOpenInterest, errorOpenInterest] = useRequest(
@@ -121,10 +119,6 @@ export default function VolumeChart() {
     const uniqueCoins = extractUniqueCoins(groupedData);
     setFormattedData(groupedData);
     setCoinKeys(uniqueCoins);
-    if (!hasSetCoinsSelected) {
-      setHasSetCoinsSelected(true); 
-      setCoinsSelected(uniqueCoins);
-    }
   };
 
   useEffect(() => {
@@ -133,30 +127,8 @@ export default function VolumeChart() {
     }
   }, [loading]);
 
-  const coinSelectors = coinKeys
-    .map((coinKey: string) => {
-      return {
-        name: coinKey,
-        event: () =>
-          setCoinsSelected((coinsSelected) => {
-            let newCoinsSelected = coinsSelected;
-            if (coinsSelected.includes(coinKey)) {
-              newCoinsSelected = coinsSelected.filter((e) => {
-                return e !== coinKey;
-              });
-            } else {
-              newCoinsSelected.push(coinKey);
-            }
-            formatData();
-            return newCoinsSelected;
-          }),
-        isChecked: coinsSelected.includes(coinKey),
-      };
-    })
-    .sort((a: CoinSelector, b: CoinSelector) => coinSelectorsSort(a, b));
-
   return (
-    <ChartWrapper title='Open Interest' loading={loading} data={formattedData} isMobile={isMobile} coinSelectors={coinSelectors}>
+    <ChartWrapper title='Open Interest' loading={loading} data={formattedData} isMobile={isMobile}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -191,7 +163,7 @@ export default function VolumeChart() {
             }}
           />
           <Legend wrapperStyle={{ bottom: -5 }} />
-          {coinsSelected.map((coinName, i) => {
+          {coinKeys.map((coinName, i) => {
             return (
               <Line
                 unit={''}

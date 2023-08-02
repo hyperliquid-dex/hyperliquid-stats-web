@@ -22,7 +22,7 @@ import {
   tooltipFormatterCurrency,
   tooltipLabelFormatter,
 } from '../../../helpers';
-import { coinSelectorsSort } from "../../../helpers/utils"; 
+import { createCoinSelectorsWithFormatArg } from "../../../helpers/utils"; 
 
 import { total_volume } from '../../../constants/api';
 import { getTokenColor, initialTokensSelectedWithOther } from '@/constants/tokens';
@@ -113,31 +113,7 @@ export default function TotalVolumeChart() {
     }
   }, [loading, error]);
 
-  const coinSelectors = coins
-    .map((coinKey: string) => {
-      return {
-        name: coinKey,
-        event: () =>
-        {
-          setCoinsSelected((coinsSelected) => {
-            let newCoinsSelected = coinsSelected;
-            if (coinsSelected.includes(coinKey)) {
-              newCoinsSelected = coinsSelected.filter((e) => {
-                return e !== coinKey;
-              });
-            } else {
-              newCoinsSelected.pop(); 
-              newCoinsSelected.push(coinKey);
-              newCoinsSelected.push('Other'); 
-            }
-            formatData(newCoinsSelected); 
-            return newCoinsSelected;
-          });
-        },
-        isChecked: coinsSelected.includes(coinKey),
-      };
-    })
-    .sort((a: CoinSelector, b: CoinSelector) => coinSelectorsSort(a, b));
+  const coinSelectors = createCoinSelectorsWithFormatArg(coins, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper title='Total Volume' loading={loading} data={formattedData} isMobile={isMobile} coinSelectors={coinSelectors}>
