@@ -16,9 +16,9 @@ import { useIsMobile } from '@/hooks/isMobile';
 import { CHART_HEIGHT } from '../../../constants';
 import {
   tooltipFormatter,
-  tooltipLabelFormatter,
   xAxisFormatter,
   formatterPercent,
+  tooltipFormatterDate,
 } from '../../../helpers';
 import { getTokenColor } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
@@ -271,7 +271,7 @@ export default function Liquidity() {
           />
           <Tooltip
             formatter={tooltipFormatter}
-            labelFormatter={tooltipLabelFormatter}
+            labelFormatter={tooltipFormatterDate}
             contentStyle={{
               textAlign: 'left',
               background: '#0A1F1B',

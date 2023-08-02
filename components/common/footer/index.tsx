@@ -42,7 +42,7 @@ const Footer = () => {
               <Flex mt='0.5'>
                 <Flex
                   as='a'
-                  href='https://github.com/thunderhead-labs/hyperliquid-stats-web'
+                  href='https://github.com/hyperliquid-dex/hyperliquid-stats-web'
                   target='_blank'
                   rel='noreferrer'
                   flexDirection='row'
@@ -57,7 +57,7 @@ const Footer = () => {
               <Flex mt='0.5' ml='5'>
                 <Flex
                   as='a'
-                  href='https://t.me/thundercove/33737'
+                  href='https://telegram.me/hyperliquidX'
                   target='_blank'
                   rel='noreferrer'
                   flexDirection='row'
