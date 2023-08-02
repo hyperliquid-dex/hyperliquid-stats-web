@@ -48,7 +48,7 @@ const REQUESTS = [
 
 export default function VolumeChart() {
   const [isMobile] = useIsMobile();
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'USER'>('COINS');
   const [formattedDataCoins, setFormattedDataCoins] = useState<any[]>([]);

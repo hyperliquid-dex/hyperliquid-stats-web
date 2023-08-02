@@ -71,7 +71,7 @@ const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_b
 
 export default function UniqueUsers() {
   const [isMobile] = useIsMobile();
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [coinKeys, setCoinKeys] = useState<any[]>([]);

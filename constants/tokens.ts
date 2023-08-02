@@ -5,7 +5,7 @@ export function getTokenColor(inputString: string): string {
       return "pink";
     }
     // Use the CryptoJS library to get the MD5 hash of the string
-    let hash = CryptoJS.MD5(inputString);
+    let hash = CryptoJS.MD5("col"+inputString);
 
     // Convert the hash into a hex string
     let color = hash.toString(CryptoJS.enc.Hex).substr(0, 6);

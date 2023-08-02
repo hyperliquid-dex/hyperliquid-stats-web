@@ -50,7 +50,7 @@ export default function RetailVolumeChart() {
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN'>('COINS');
   const [formattedDataCoins, setFormattedDataCoins] = useState<any[]>([]);
   const [formattedDataMargin, setFormattedDataMargin] = useState<any[]>([]);
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'Other']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE','Other']);
   const [coinKeys, setCoinKeys] = useState<any[]>([]);
   const [dataCumulativeUsdVolume, loadingCumulativeUsdVolume, errorCumulativeUsdVolume] =
     useRequest(REQUESTS[0], [], 'chart_data');

@@ -11,7 +11,7 @@ import {
 import { useEffect, useState } from 'react';
 import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useRequest } from '@/hooks/useRequest';
-import ChartWrapper from '../../common/chartWrapper';
+import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
 import { BRIGHT_GREEN, CHART_HEIGHT, GREEN, YAXIS_WIDTH } from '../../../constants';
 import {
   xAxisFormatter,
@@ -28,8 +28,10 @@ const REQUESTS = [open_interest];
 
 export default function VolumeChart() {
   const [isMobile] = useIsMobile();
-
+  const [hasSetCoinsSelected, setHasSetCoinsSelected] = useState<boolean>(false);
   const [coinKeys, setCoinKeys] = useState<any[]>([]);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>([]);
+
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dataOpenInterest, loadingOpenInterest, errorOpenInterest] = useRequest(
     REQUESTS[0],
@@ -117,6 +119,10 @@ export default function VolumeChart() {
     const uniqueCoins = extractUniqueCoins(groupedData);
     setFormattedData(groupedData);
     setCoinKeys(uniqueCoins);
+    if (!hasSetCoinsSelected) {
+      setHasSetCoinsSelected(true); 
+      setCoinsSelected(uniqueCoins);
+    }
   };
 
   useEffect(() => {
@@ -125,8 +131,37 @@ export default function VolumeChart() {
     }
   }, [loading]);
 
+  const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
+    if (a.isChecked !== b.isChecked) {
+      return a.isChecked ? -1 : 1;
+    }
+    return a.name.localeCompare(b.name);
+  };
+
+  const coinSelectors = coinKeys
+    .map((coinKey: string) => {
+      return {
+        name: coinKey,
+        event: () =>
+          setCoinsSelected((coinsSelected) => {
+            let newCoinsSelected = coinsSelected;
+            if (coinsSelected.includes(coinKey)) {
+              newCoinsSelected = coinsSelected.filter((e) => {
+                return e !== coinKey;
+              });
+            } else {
+              newCoinsSelected.push(coinKey);
+            }
+            formatData();
+            return newCoinsSelected;
+          }),
+        isChecked: coinsSelected.includes(coinKey),
+      };
+    })
+    .sort((a: CoinSelector, b: CoinSelector) => coinSelectorsSort(a, b));
+
   return (
-    <ChartWrapper title='Open Interest' loading={loading} data={formattedData} isMobile={isMobile}>
+    <ChartWrapper title='Open Interest' loading={loading} data={formattedData} isMobile={isMobile} coinSelectors={coinSelectors}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -161,7 +196,7 @@ export default function VolumeChart() {
             }}
           />
           <Legend wrapperStyle={{ bottom: -5 }} />
-          {coinKeys.map((coinName, i) => {
+          {coinsSelected.map((coinName, i) => {
             return (
               <Line
                 unit={''}

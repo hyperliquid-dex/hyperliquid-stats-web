@@ -35,7 +35,7 @@ export default function FundingRate() {
     [],
     'chart_data'
   );
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB']);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(['ETH', 'BTC', 'ARB', 'APE', 'ATOM', 'AVAX', 'BNB', 'COMP', 'CRV', 'DOGE']);
 
   const loading = loadingFundingRate;
   const error = errorFundingRate;
