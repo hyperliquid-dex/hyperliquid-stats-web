@@ -12,7 +12,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
 import {
@@ -52,8 +51,8 @@ const REQUESTS = [
   cumulative_hlp_liquidator_pnl_false,
 ];
 
-export default function LiquidatorChart() {
-  const [isMobile] = useIsMobile();
+export default function LiquidatorChart(props: any) {
+  const isMobile = props.isMobile;
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'PNL'>('COINS');
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);

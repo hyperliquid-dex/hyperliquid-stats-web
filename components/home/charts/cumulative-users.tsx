@@ -11,7 +11,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 import { useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN, GREEN } from '../../../constants';
@@ -29,8 +28,8 @@ import {
 
 const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_by_coin];
 
-export default function CumulativeUsers() {
-  const [isMobile] = useIsMobile();
+export default function CumulativeUsers(props: any) {
+  const isMobile = props.isMobile;
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
 

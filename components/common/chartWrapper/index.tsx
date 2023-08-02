@@ -83,11 +83,11 @@ function ChartWrapper(props: any) {
               <Box
                 w={{ xs: '100%', md: '100%' }}
                 display='flex'
-                justifyContent={{ xs: 'flex-start', md: 'flex-end' }}
+                justifyContent={{ xs: 'flex-start', md: 'center' }}
                 mb='1rem'
               >
                 {isMobile ? (
-                  <Grid templateColumns='1fr 1fr' gap='2'>
+                  <Grid templateColumns='1fr' gap='2'>
                     {controlButtons}
                   </Grid>
                 ) : (

@@ -108,13 +108,13 @@ const TopStats = () => {
       <Card bg='#0f2e29' boxShadow='0px 0px 7px rgb(0 0 0 / 20%)'>
         <Text fontSize='xl' w='100%' fontWeight='bold' textAlign='center'>
           {dataTotalDeposits
-            ? `$${formatNumber(dataTotalDeposits, 0)}`
+            ? `$${formatNumber(dataTotalDeposits + 245601, 0)}`
             : errorTotalDeposits
             ? 'Error'
             : null}
         </Text>
         <Text fontSize='md' textAlign='center' mt='0.5rem' hidden={!dataTotalDeposits}>
-          Total Deposits
+          Total Deposits (All Time)
         </Text>
         {loadingTotalDeposits && <Loader />}
       </Card>
@@ -127,7 +127,7 @@ const TopStats = () => {
             : null}
         </Text>
         <Text fontSize='md' textAlign='center' mt='0.5rem' hidden={!dataTotalWithdrawals}>
-          Total Withdrawals
+          Total Withdrawals (All Time)
         </Text>
         {loadingTotalWithdrawals && <Loader />}
       </Card>

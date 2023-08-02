@@ -13,7 +13,6 @@ import {
 import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 
 import ChartWrapper from '../../common/chartWrapper';
 import { BLUE, BRIGHT_GREEN, CHART_HEIGHT, GREEN, ORANGE, RED } from '../../../constants';
@@ -31,8 +30,8 @@ const REQUESTS = [hlp_positions, asset_ctxs, hlp_liquidator_pnl];
 
 const DAY = 60 * 60 * 24 * 1000;
 
-export default function Hlp() {
-  const [isMobile] = useIsMobile();
+export default function Hlp(props: any) {
+  const isMobile = props.isMobile;
 
   const [dataMode, setDataMode] = useState<'COINS' | 'NET' | 'PNL' | 'HEDGED'>('PNL');
   const [coins, setCoins] = useState<string[]>([]);

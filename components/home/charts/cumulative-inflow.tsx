@@ -22,12 +22,11 @@ import {
   tooltipFormatterDate,
 } from '../../../helpers';
 import { daily_inflow, cumulative_inflow } from '../../../constants/api';
-import { useIsMobile } from '@/hooks/isMobile';
 
 const REQUESTS = [daily_inflow, cumulative_inflow];
 
-export default function CumulativeInflow() {
-  const [isMobile] = useIsMobile();
+export default function CumulativeInflow(props: any) {
+  const isMobile = props.isMobile;
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dataDailyInflow, loadingDailyInflow, errorDailyInflow] = useRequest(

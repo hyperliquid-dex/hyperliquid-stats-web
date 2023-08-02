@@ -3,13 +3,13 @@ import Select from 'react-dropdown-select';
 import { Box } from '@chakra-ui/react';
 import moment from 'moment';
 import { DateRange } from 'react-date-range';
-import strftime from 'strftime';
+import strftime, { timezone } from 'strftime';
 import { DataContext } from '../../../contexts/data';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 
 const ALL_TIME_ID = 4;
-const DATA_START_DATE = new Date('2023-06-14');
+const DATA_START_DATE = new Date('2023-06-14T20:00:00.000');
 const DATE_NOW = new Date();
 
 export const DateRangeSelect = () => {

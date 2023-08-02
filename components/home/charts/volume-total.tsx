@@ -11,7 +11,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 
 import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper, { CoinSelector }  from '../../common/chartWrapper';
@@ -29,8 +28,9 @@ import { getTokenColor, initialTokensSelectedWithOther } from '@/constants/token
 
 const REQUESTS = [total_volume];
 
-export default function TotalVolumeChart() {
-  const [isMobile] = useIsMobile();
+export default function TotalVolumeChart(props: any) {
+  const isMobile = props.isMobile;
+
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
   const [coins, setCoins] = useState<string[]>([]);
@@ -215,7 +215,7 @@ export default function TotalVolumeChart() {
       <Box w='100%' mt='3'>
         <Text color='#bbb'>
           Top 10 Coins grouped daily and remaining coins grouped by Other. Volume tracked since
-          introduction of fees.
+          introduction of fees on 6/13/2023.
         </Text>
       </Box>
     </ChartWrapper>

@@ -36,7 +36,6 @@ import {
   daily_usd_volume_by_crossed,
   daily_usd_volume_by_user,
 } from '../../../constants/api';
-import { useIsMobile } from '@/hooks/isMobile';
 
 const REQUESTS = [
   cumulative_usd_volume,
@@ -46,8 +45,8 @@ const REQUESTS = [
   daily_usd_volume_by_user,
 ];
 
-export default function RetailVolumeChart() {
-  const [isMobile] = useIsMobile();
+export default function RetailVolumeChart(props: any) {
+  const isMobile = props.isMobile;
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN'>('COINS');
   const [formattedDataCoins, setFormattedDataCoins] = useState<any[]>([]);

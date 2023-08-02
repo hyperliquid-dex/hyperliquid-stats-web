@@ -23,12 +23,11 @@ import {
   tooltipFormatterCurrency,
   tooltipFormatterDate,
 } from '../../../helpers';
-import { useIsMobile } from '@/hooks/isMobile';
 
 const REQUESTS = [cumulative_user_pnl, user_pnl];
 
-export default function TradersProfitLossChart() {
-  const [isMobile] = useIsMobile();
+export default function TradersProfitLossChart(props: any) {
+  const isMobile = props.isMobile;
 
   const [data, setData] = useState<any>(null);
   const [dataCumulativeUserPNL, loadingCumulativeUserPNL, errorCumulativeUserPNL] = useRequest(

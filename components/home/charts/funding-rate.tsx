@@ -11,7 +11,6 @@ import {
 import { useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
 import { CHART_HEIGHT } from '../../../constants';
 import {
@@ -27,8 +26,8 @@ import { funding_rate } from '../../../constants/api';
 
 const REQUESTS = [funding_rate];
 
-export default function FundingRate() {
-  const [isMobile] = useIsMobile();
+export default function FundingRate(props: any) {
+  const isMobile = props.isMobile;
 
   const [coinKeys, setCoinKeys] = useState<string[]>([]);
   const [formattedData, setFormattedData] = useState<GroupedFundingData[]>([]);

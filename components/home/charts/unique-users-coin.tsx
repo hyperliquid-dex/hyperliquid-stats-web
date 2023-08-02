@@ -12,7 +12,6 @@ import {
 import { useEffect, useState } from 'react';
 import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 
 import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN } from '../../../constants';
@@ -71,8 +70,8 @@ type TempGroupedTradeData = {
 
 const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_by_coin];
 
-export default function UniqueUsers() {
-  const [isMobile] = useIsMobile();
+export default function UniqueUsers(props: any) {
+  const isMobile = props.isMobile;
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);

@@ -13,7 +13,6 @@ import {
 import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useIsMobile } from '@/hooks/isMobile';
 
 import ChartWrapper,  { CoinSelector } from '../../common/chartWrapper';
 import {
@@ -48,8 +47,8 @@ const REQUESTS = [
   cumulative_trades,
 ];
 
-export default function VolumeChart() {
-  const [isMobile] = useIsMobile();
+export default function VolumeChart(props: any) {
+  const isMobile = props.isMobile;
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'USER'>('COINS');
