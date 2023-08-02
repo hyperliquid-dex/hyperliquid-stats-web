@@ -104,8 +104,7 @@ export const tooltipLabelFormatterPercent = (label: any, args: any): any => {
     label = new Date(label * 1000);
   }
   const item = args && args[0] && args[0].payload && args[0];
-  const dateFmtString = 'Total %d-%m-%y : ';
-  const date = strftime(dateFmtString, label);
+  const date = `Total ${label.toLocaleDateString()} : `;
   const all = item && item.payload.all;
   if (all) {
     return `${date} ${formatNumberWithOptions(all, { compact: true })}%`;
@@ -127,8 +126,8 @@ export const tooltipLabelFormatter = (label: any, args: any, key?: string): any 
     label = new Date(label * 1000);
   }
   const item = args && args[0] && args[0].payload && args[0];
-  const dateFmtString = 'Total %d-%m-%y :';
-  const date = strftime(dateFmtString, label);
+  const date = `Total ${label.toLocaleDateString()} : `;
+
   let value;
   if (key) {
     value = item && item.payload[key];

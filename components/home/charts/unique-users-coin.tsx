@@ -18,7 +18,7 @@ import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN } from '../../../constants';
 import {
   tooltipFormatter,
-  tooltipLabelFormatter,
+  tooltipFormatterDate,
   xAxisFormatter,
   yaxisFormatterNumber,
   yaxisFormatterPercent,
@@ -239,7 +239,7 @@ export default function UniqueUsers() {
           />
           <Tooltip
             formatter={tooltipFormatter}
-            labelFormatter={tooltipLabelFormatter}
+            labelFormatter={tooltipFormatterDate}
             contentStyle={{
               textAlign: 'left',
               background: '#0A1F1B',
