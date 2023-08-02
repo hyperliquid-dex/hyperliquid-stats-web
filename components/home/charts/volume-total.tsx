@@ -21,7 +21,7 @@ import {
   tooltipFormatterCurrency,
   tooltipLabelFormatter,
 } from '../../../helpers';
-import { createCoinSelectorsWithFormatArg } from '../../../helpers/utils';
+import { createCoinSelectors } from '../../../helpers/utils';
 
 import { total_volume } from '../../../constants/api';
 import { getTokenColor, initialTokensSelectedWithOther } from '@/constants/tokens';
@@ -30,7 +30,7 @@ const REQUESTS = [total_volume];
 
 export default function TotalVolumeChart(props: any) {
   const isMobile = props.isMobile;
-
+  console.log("total volume chart ismobile:", isMobile);
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
   const [coins, setCoins] = useState<string[]>([]);
@@ -118,12 +118,7 @@ export default function TotalVolumeChart(props: any) {
     }
   }, [loading, error]);
 
-  const coinSelectors = createCoinSelectorsWithFormatArg(
-    coins,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coins, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper

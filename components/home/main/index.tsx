@@ -21,13 +21,14 @@ import HlpExposure from '../charts/hlp';
 import TotalVolumeChart from '../charts/volume-total';
 import UniqueUsers from '../charts/unique-users-coin';
 import { useEffect, useState } from 'react';
-
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 const Main = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 700);
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 700);
-  }, [window.innerWidth]);
-
+  const windowDimensions = useWindowDimensions(); 
+  const isMobile = windowDimensions.width ? windowDimensions.width < 700 : false; 
+  // const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 700);
+  // useEffect(() => {
+  //   setIsMobile(window.innerWidth < 700);
+  // }, [window.innerWidth]);
   return (
     <Container
       maxWidth='100%'

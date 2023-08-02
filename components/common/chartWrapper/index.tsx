@@ -34,6 +34,7 @@ const Loader = () => (
 
 function ChartWrapper(props: any) {
   let isMobile = props.isMobile;
+  console.log("chart wrapper", isMobile); 
   const { title, loading, controls, zIndex, coinSelectors } = props;
   const controlButtons =
     controls &&
@@ -87,9 +88,7 @@ function ChartWrapper(props: any) {
                 mb='1rem'
               >
                 {isMobile ? (
-                  <Grid templateColumns='1fr' gap='2'>
-                    {controlButtons}
-                  </Grid>
+                  <Grid gap='2'>{controlButtons}</Grid>
                 ) : (
                   <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>
                 )}

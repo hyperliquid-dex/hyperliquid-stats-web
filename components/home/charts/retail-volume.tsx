@@ -26,7 +26,7 @@ import {
   yaxisFormatter,
   xAxisFormatter,
 } from '../../../helpers';
-import { createCoinSelectorsWithFormatArg } from '../../../helpers/utils';
+import { createCoinSelectors } from '../../../helpers/utils';
 
 import { getTokenColor, initialTokensSelectedWithOther } from '../../../constants/tokens';
 import {
@@ -244,12 +244,7 @@ export default function RetailVolumeChart(props: any) {
     }
   }, [loading, error]);
 
-  const coinSelectors = createCoinSelectorsWithFormatArg(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper
