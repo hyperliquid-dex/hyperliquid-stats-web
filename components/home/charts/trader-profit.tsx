@@ -23,11 +23,12 @@ import {
   tooltipFormatterCurrency,
   tooltipFormatterDate,
 } from '../../../helpers';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [cumulative_user_pnl, user_pnl];
 
-export default function TradersProfitLossChart(props: any) {
-  const isMobile = props.isMobile;
+export default function TradersProfitLossChart() {
+  const { isMobile } = useScreenSize();
 
   const [data, setData] = useState<any>(null);
   const [dataCumulativeUserPNL, loadingCumulativeUserPNL, errorCumulativeUserPNL] = useRequest(

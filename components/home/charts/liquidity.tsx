@@ -23,11 +23,12 @@ import { createCoinSelectors } from '../../../helpers/utils';
 
 import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [liquidity_by_coin];
 
-export default function Liquidity(props: any) {
-  const isMobile = props.isMobile;
+export default function Liquidity() {
+  const { isMobile } = useScreenSize();
 
   const [formattedData0, setFormattedData0] = useState<any[]>([]);
   const [formattedData1000, setFormattedData1000] = useState<any[]>([]);

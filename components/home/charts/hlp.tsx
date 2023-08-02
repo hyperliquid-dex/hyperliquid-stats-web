@@ -26,15 +26,12 @@ import {
 
 import { getTokenColor } from '@/constants/tokens';
 import { asset_ctxs, hlp_liquidator_pnl, hlp_positions } from '@/constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 const REQUESTS = [hlp_positions, asset_ctxs, hlp_liquidator_pnl];
 
-const DAY = 60 * 60 * 24 * 1000;
+export default function Hlp() {
+  const { isMobile } = useScreenSize();
 
-type Props = {isMobile: boolean}; 
-
-export default function Hlp(props: any) {
-  const isMobile = props.isMobile; 
-  
   const [dataHlpPositions, loadingDataHlpPositions, errorDataHlpPositions] = useRequest(
     REQUESTS[0],
     [],
@@ -121,7 +118,10 @@ export default function Hlp(props: any) {
     return yyyy + '-' + mm + '-' + dd + 'T00:00:00';
   }
 
-  const makeFormattedData = (hlpPositions: HlpPosition[], hlpPnL: Map<string, HlpPnl>): [GroupedData[], string[]] => {
+  const makeFormattedData = (
+    hlpPositions: HlpPosition[],
+    hlpPnL: Map<string, HlpPnl>
+  ): [GroupedData[], string[]] => {
     const map = new Map<string, GroupedData>();
     const uniqueTopCoins = new Set<string>();
 

@@ -30,6 +30,7 @@ import {
   daily_unique_users,
   daily_unique_users_by_coin,
 } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 type DailyUniqueUsersByCoin = {
   time: string;
@@ -70,8 +71,8 @@ type TempGroupedTradeData = {
 
 const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_by_coin];
 
-export default function UniqueUsers(props: any) {
-  const isMobile = props.isMobile;
+export default function UniqueUsers() {
+  const { isMobile } = useScreenSize();
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
@@ -179,12 +180,7 @@ export default function UniqueUsers(props: any) {
     }
   }, [loading]);
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper

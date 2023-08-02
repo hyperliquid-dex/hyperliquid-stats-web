@@ -38,6 +38,7 @@ import {
   daily_trades_by_crossed,
   daily_trades_by_user,
 } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [
   daily_trades,
@@ -47,8 +48,8 @@ const REQUESTS = [
   cumulative_trades,
 ];
 
-export default function VolumeChart(props: any) {
-  const isMobile = props.isMobile;
+export default function VolumeChart() {
+  const { isMobile } = useScreenSize();
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'USER'>('COINS');
@@ -238,12 +239,7 @@ export default function VolumeChart(props: any) {
     }
   }, [loading, dataMode]);
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper

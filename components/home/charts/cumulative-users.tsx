@@ -25,11 +25,12 @@ import {
   daily_unique_users,
   daily_unique_users_by_coin,
 } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_by_coin];
 
 export default function CumulativeUsers(props: any) {
-  const isMobile = props.isMobile;
+  const { isMobile } = useScreenSize();
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
 

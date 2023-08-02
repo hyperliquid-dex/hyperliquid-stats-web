@@ -21,11 +21,12 @@ import {
   tooltipFormatterDate,
 } from '../../../helpers';
 import { total_accrued_fees } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [total_accrued_fees];
 
-export default function Fees(props: any) {
-  const isMobile = props.isMobile;
+export default function Fees() {
+  const { isMobile } = useScreenSize();
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dailyFeesAccrued, loading, error] = useRequest(REQUESTS[0], [], 'chart_data');

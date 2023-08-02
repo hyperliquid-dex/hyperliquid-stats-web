@@ -19,12 +19,13 @@ import { formatNumberWithOptions } from '../../../helpers/index';
 import { useRequest } from '@/hooks/useRequest';
 import ChartWrapper from '../../common/chartWrapper';
 import { formatAddress } from '../../../utils/formatting';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [largest_liquidated_notional_by_user];
 
 export default function TableComponent() {
   const [dataLargestLiquidatedNotional] = useRequest(REQUESTS[0], [], 'table_data');
-  const [isMobile] = useMediaQuery('(max-width: 700px)');
+  const { isMobile } = useScreenSize();
 
   const columns = React.useMemo(
     () => [

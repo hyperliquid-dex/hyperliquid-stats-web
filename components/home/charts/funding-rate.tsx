@@ -23,11 +23,12 @@ import { createCoinSelectors } from '../../../helpers/utils';
 
 import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { funding_rate } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [funding_rate];
 
-export default function FundingRate(props: any) {
-  const isMobile = props.isMobile;
+export default function FundingRate() {
+  const { isMobile } = useScreenSize();
 
   const [coinKeys, setCoinKeys] = useState<string[]>([]);
   const [formattedData, setFormattedData] = useState<GroupedFundingData[]>([]);

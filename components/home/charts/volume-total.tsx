@@ -25,11 +25,12 @@ import { createCoinSelectors } from '../../../helpers/utils';
 
 import { total_volume } from '../../../constants/api';
 import { getTokenColor, initialTokensSelectedWithOther } from '@/constants/tokens';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [total_volume];
 
-export default function TotalVolumeChart(props: any) {
-  const isMobile = props.isMobile;
+export default function TotalVolumeChart() {
+  const { isMobile } = useScreenSize();
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
@@ -118,12 +119,7 @@ export default function TotalVolumeChart(props: any) {
     }
   }, [loading, error]);
 
-  const coinSelectors = createCoinSelectors(
-    coins,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coins, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper

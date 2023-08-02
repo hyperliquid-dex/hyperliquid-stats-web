@@ -23,11 +23,12 @@ import {
 
 import { getTokenColor } from '../../../constants/tokens';
 import { open_interest } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [open_interest];
 
-export default function VolumeChart(props: any) {
-  const isMobile = props.isMobile;
+export default function VolumeChart() {
+  const { isMobile } = useScreenSize();
   const [coinKeys, setCoinKeys] = useState<any[]>([]);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);

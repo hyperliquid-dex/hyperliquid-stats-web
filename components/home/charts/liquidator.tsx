@@ -41,6 +41,7 @@ import {
   hlp_liquidator_pnl_false,
   cumulative_hlp_liquidator_pnl_false,
 } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [
   cumulative_liquidated_notional,
@@ -51,8 +52,8 @@ const REQUESTS = [
   cumulative_hlp_liquidator_pnl_false,
 ];
 
-export default function LiquidatorChart(props: any) {
-  const isMobile = props.isMobile;
+export default function LiquidatorChart() {
+  const { isMobile } = useScreenSize();
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'PNL'>('COINS');
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
@@ -300,12 +301,7 @@ export default function LiquidatorChart(props: any) {
     return [-1 * Math.abs(maxCumulativePnl) * 1.1, Math.abs(maxCumulativePnl) * 1.1];
   };
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper

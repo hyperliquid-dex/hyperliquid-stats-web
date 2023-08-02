@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { Container, Box, Text, Grid, Flex } from '@chakra-ui/react';
-import * as S from './styles';
 import TopStats from '../charts/top-stats';
 import RetailVolumeChart from '../charts/retail-volume';
 import VolumeNumTrades from '../charts/volume-num-trades';
@@ -20,12 +19,7 @@ import Liquidity from '../charts/liquidity';
 import HlpExposure from '../charts/hlp';
 import TotalVolumeChart from '../charts/volume-total';
 import UniqueUsers from '../charts/unique-users-coin';
-import { useEffect, useState } from 'react';
-import { useMediaQuery } from '@chakra-ui/react';
-
 const Main = () => {
-  const isMobile = useMediaQuery('(max-width: 700px)');
-
   return (
     <Container
       maxWidth='100%'
@@ -80,28 +74,28 @@ const Main = () => {
             <TopStats />
           </Box>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
-            <TotalVolumeChart isMobile={isMobile} />
-            <OpenInterestChart isMobile={isMobile} />
+            <TotalVolumeChart />
+            <OpenInterestChart />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
-            <RetailVolumeChart isMobile={isMobile} />
-            <FundingRateChart isMobile={isMobile} />
+            <RetailVolumeChart />
+            <FundingRateChart />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
-            <HlpExposure isMobile={isMobile} />
-            <CumulativeNotionalLiquidatedChart isMobile={isMobile} />
+            <HlpExposure />
+            <CumulativeNotionalLiquidatedChart />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
-            <CumulativeInflowChart isMobile={isMobile} />
-            <TradersProfitLossChart isMobile={isMobile} />
+            <CumulativeInflowChart />
+            <TradersProfitLossChart />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
-            <Liquidity isMobile={isMobile} />
-            <UniqueUsers isMobile={isMobile} />
+            <Liquidity />
+            <UniqueUsers />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
-            <CumulativeUsersChart isMobile={isMobile} />
-            <VolumeNumTrades isMobile={isMobile} />
+            <CumulativeUsersChart />
+            <VolumeNumTrades />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
             <TableLargestUsers />

@@ -12,7 +12,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN, GREEN, RED } from '../../../constants';
 import {
@@ -22,11 +21,12 @@ import {
   tooltipFormatterDate,
 } from '../../../helpers';
 import { daily_inflow, cumulative_inflow } from '../../../constants/api';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const REQUESTS = [daily_inflow, cumulative_inflow];
 
-export default function CumulativeInflow(props: any) {
-  const isMobile = props.isMobile;
+export default function CumulativeInflow() {
+  const { isMobile } = useScreenSize();
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dataDailyInflow, loadingDailyInflow, errorDailyInflow] = useRequest(

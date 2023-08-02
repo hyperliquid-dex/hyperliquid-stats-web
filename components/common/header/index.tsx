@@ -1,11 +1,12 @@
 'use client';
 import React from 'react';
 import NextImg from 'next/image';
-import { Container, Box, Image, Flex, useMediaQuery } from '@chakra-ui/react';
+import { Container, Box, Image, Flex } from '@chakra-ui/react';
 import * as S from './styles';
+import useScreenSize from '@/hooks/useScreenSize';
 
 const Header = () => {
-  const [isMobile] = useMediaQuery('(max-width: 700px)');
+  const { isMobile } = useScreenSize();
 
   return (
     <Container maxWidth='100%' position='relative' zIndex='9' m='0' px='1rem'>

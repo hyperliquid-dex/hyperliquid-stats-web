@@ -1,3 +1,4 @@
+import useScreenSize from '@/hooks/useScreenSize';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Box,
@@ -33,7 +34,8 @@ const Loader = () => (
 );
 
 function ChartWrapper(props: any) {
-  let isMobile = props.isMobile;
+  const { isMobile } = useScreenSize();
+
   const { title, loading, controls, zIndex, coinSelectors } = props;
   const controlButtons =
     controls &&
