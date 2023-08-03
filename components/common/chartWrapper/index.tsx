@@ -63,12 +63,7 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
     });
 
   const coinSelectorsMenu = coinSelectors && (
-    <Box
-      w={{ xs: '100%', md: '100%' }}
-      display='flex'
-      justifyContent={{ xs: 'flex-start', md: 'flex-end' }}
-      mb='1rem'
-    >
+    <Box>
       <Menu closeOnSelect={false} preventOverflow={true}>
         <MenuButton
           as={Button}
@@ -121,10 +116,21 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
   );
 
   const menu = (
-      <Grid templateColumns='1fr auto' gap='2'  marginLeft="auto">
-        {isMobile && controls ? controlButtons : <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>}
+    <Box display='flex' padding='0'>
+      <Grid
+        mb='1rem'
+        templateColumns='1fr auto'
+        gap={controls ? '2' : '0'}
+        justifyContent='flex-start'
+      >
+        {isMobile && controls ? (
+          controlButtons
+        ) : (
+          <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>
+        )}
         {coinSelectorsMenu}
       </Grid>
+    </Box>
   );
 
   return (
@@ -135,18 +141,14 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
         bg='#0f2e29'
         boxShadow='0px 0px 7px rgb(0 0 0 / 20%)'
         borderRadius={{ xs: '0', md: '2xl' }}
-        zIndex={zIndex}      
+        zIndex={zIndex}
       >
-        <Box display="flex" flexDirection={"row"} gap={4} flexWrap={"wrap"}>
-          <Text
-            fontSize='1.2rem'
-            fontWeight='600'
-            whiteSpace={'nowrap'}
-          >
+        <Grid gridTemplateColumns={{ xs: '1fr', xl: '1fr auto' }} gap={4}>
+          <Text fontSize='1.2rem' fontWeight='600' whiteSpace={'nowrap'}>
             {title}
           </Text>
           {menu}
-        </Box>
+        </Grid>
         {loading && <Loader />}
         {children}
       </Box>
