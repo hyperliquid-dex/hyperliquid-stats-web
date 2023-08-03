@@ -116,19 +116,10 @@ export default function TotalVolumeChart() {
     }
   }, [loading, error]);
 
-  const coinSelectors = createCoinSelectors(
-    coins,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coins, coinsSelected, setCoinsSelected, formatData);
 
   return (
-    <ChartWrapper
-      title='Total Volume'
-      loading={loading}
-      coinSelectors={coinSelectors}
-    >
+    <ChartWrapper title='Total Volume' loading={loading} coinSelectors={coinSelectors}>
       <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <ComposedChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -136,7 +127,8 @@ export default function TotalVolumeChart() {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
           <YAxis
             dataKey='total'
@@ -144,14 +136,16 @@ export default function TotalVolumeChart() {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={70}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <YAxis
             dataKey='cumulative'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <Legend wrapperStyle={{ bottom: -5 }} />
           {coinsSelected.map((coin, i) => {
             return (

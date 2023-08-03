@@ -236,12 +236,7 @@ export default function VolumeChart() {
     }
   }, [loading, dataMode]);
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper
@@ -266,7 +261,8 @@ export default function VolumeChart() {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            unit={''}
+            tick={{ fill: '#f9f9f9' }}
+            unit={''}
             tickMargin={10}
           />
           <YAxis
@@ -276,7 +272,8 @@ export default function VolumeChart() {
             domain={['0', maxAllValueUser * 1.1]}
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}            unit={''}
+            tick={{ fill: '#f9f9f9' }}
+            unit={''}
           />
           <YAxis
             dataKey='cumulative'
@@ -284,7 +281,8 @@ export default function VolumeChart() {
             yAxisId='right'
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}            unit={''}
+            tick={{ fill: '#f9f9f9' }}
+            unit={''}
           />
           <Tooltip
             formatter={tooltipFormatter}

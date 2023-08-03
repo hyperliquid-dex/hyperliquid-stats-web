@@ -178,12 +178,7 @@ export default function UniqueUsers() {
     }
   }, [loading]);
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper
@@ -199,7 +194,8 @@ export default function UniqueUsers() {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
           <YAxis
             domain={[0, 'auto']}
@@ -207,14 +203,16 @@ export default function UniqueUsers() {
             tickCount={undefined}
             tickFormatter={yaxisFormatterPercent}
             width={55}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <YAxis
             dataKey='daily_unique_users'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <Tooltip
             formatter={tooltipFormatter}
             labelFormatter={tooltipFormatterDate}

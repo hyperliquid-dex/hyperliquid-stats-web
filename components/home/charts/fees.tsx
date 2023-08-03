@@ -74,7 +74,8 @@ export default function Fees() {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
           <YAxis
             dataKey='daily_accrued_fees'
@@ -82,14 +83,16 @@ export default function Fees() {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={70}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <YAxis
             dataKey='cumulative_accrued_fees'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <Legend wrapperStyle={{ bottom: -5 }} />
           <Bar
             isAnimationActive={false}

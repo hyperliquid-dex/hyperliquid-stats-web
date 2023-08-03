@@ -244,12 +244,7 @@ export default function RetailVolumeChart(props: any) {
     }
   }, [loading, error]);
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper
@@ -269,7 +264,8 @@ export default function RetailVolumeChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
           <YAxis
             dataKey='all'
@@ -277,14 +273,16 @@ export default function RetailVolumeChart(props: any) {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <YAxis
             dataKey='cumulative'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <Tooltip
             formatter={tooltipFormatterCurrency}
             labelFormatter={tooltipLabelFormatter}

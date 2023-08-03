@@ -71,10 +71,7 @@ export default function CumulativeUsers() {
   }, [loading, error]);
 
   return (
-    <ChartWrapper
-      title='Cumulative New Users'
-      loading={loading}
-    >
+    <ChartWrapper title='Cumulative New Users' loading={loading}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -91,14 +88,16 @@ export default function CumulativeUsers() {
             tickCount={7}
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <YAxis
             dataKey='cumulative_new_users'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}          />
+            tick={{ fill: '#f9f9f9' }}
+          />
           <Tooltip
             formatter={tooltipFormatter}
             labelFormatter={tooltipFormatterDate}

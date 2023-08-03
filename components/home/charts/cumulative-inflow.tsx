@@ -113,7 +113,7 @@ export default function CumulativeInflow() {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={70}
-            tick={{ fill: '#f9f9f9'}}
+            tick={{ fill: '#f9f9f9' }}
           />
           <YAxis
             dataKey='cumulative_inflow'
@@ -121,7 +121,7 @@ export default function CumulativeInflow() {
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9'}}
+            tick={{ fill: '#f9f9f9' }}
           />
           <Tooltip
             formatter={tooltipFormatterCurrency}

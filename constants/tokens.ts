@@ -12,10 +12,7 @@ export const initialTokensSelected = [
   'DOGE',
   'ETH',
 ];
-export const initialTokensSelectedWithOther = [
-  ...initialTokensSelected,
-  'Other',
-];
+export const initialTokensSelectedWithOther = [...initialTokensSelected, 'Other'];
 
 export function getTokenColor(token: string): string {
   if (token == 'Other') {

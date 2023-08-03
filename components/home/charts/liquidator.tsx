@@ -300,12 +300,7 @@ export default function LiquidatorChart(props: any) {
     return [-1 * Math.abs(maxCumulativePnl) * 1.1, Math.abs(maxCumulativePnl) * 1.1];
   };
 
-  const coinSelectors = createCoinSelectors(
-    coinKeys,
-    coinsSelected,
-    setCoinsSelected,
-    formatData
-  );
+  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper
@@ -322,7 +317,8 @@ export default function LiquidatorChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
           <Tooltip
             formatter={tooltipFormatterCurrency}
@@ -392,14 +388,16 @@ export default function LiquidatorChart(props: any) {
                 tickCount={7}
                 tickFormatter={yaxisFormatter}
                 width={70}
-                tick={{ fill: '#f9f9f9' }}              />
+                tick={{ fill: '#f9f9f9' }}
+              />
               <YAxis
                 orientation='right'
                 yAxisId='right'
                 dataKey={'cumulative'}
                 tickFormatter={yaxisFormatter}
                 width={YAXIS_WIDTH}
-                tick={{ fill: '#f9f9f9' }}              />
+                tick={{ fill: '#f9f9f9' }}
+              />
               <Line
                 isAnimationActive={false}
                 type='monotone'
@@ -419,14 +417,16 @@ export default function LiquidatorChart(props: any) {
                 width={70}
                 tickFormatter={yaxisFormatter}
                 domain={pnlYDomain()}
-                tick={{ fill: '#f9f9f9' }}              />
+                tick={{ fill: '#f9f9f9' }}
+              />
               <YAxis
                 orientation='right'
                 yAxisId='right'
                 tickFormatter={yaxisFormatter}
                 domain={cumulativePnlYDomain()}
                 width={YAXIS_WIDTH}
-                tick={{ fill: '#f9f9f9' }}              />
+                tick={{ fill: '#f9f9f9' }}
+              />
               <Bar
                 isAnimationActive={false}
                 type='monotone'

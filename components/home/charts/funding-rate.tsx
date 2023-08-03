@@ -115,11 +115,7 @@ export default function FundingRate() {
   const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
-    <ChartWrapper
-      title='Annualized Funding Rate'
-      loading={loading}
-      coinSelectors={coinSelectors}
-    >
+    <ChartWrapper title='Annualized Funding Rate' loading={loading} coinSelectors={coinSelectors}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -127,13 +123,10 @@ export default function FundingRate() {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
-          <YAxis
-            tick={{ fill: '#f9f9f9' }}            dx={6}
-            width={75}
-            tickFormatter={formatterPercent}
-          />
+          <YAxis tick={{ fill: '#f9f9f9' }} dx={6} width={75} tickFormatter={formatterPercent} />
           <Tooltip
             formatter={tooltipFormatter}
             labelFormatter={tooltipFormatterDate}

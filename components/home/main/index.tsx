@@ -76,7 +76,7 @@ const Main = () => {
           </Box>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
             <TotalVolumeChart />
-            <OpenInterestChart/>
+            <OpenInterestChart />
           </Grid>
           <Grid templateColumns={{ xs: '1fr', lg: 'repeat(2, 1fr)' }} gap={{ xs: '2', md: '3' }}>
             <RetailVolumeChart />

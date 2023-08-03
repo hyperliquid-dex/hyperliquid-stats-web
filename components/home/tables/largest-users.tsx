@@ -71,7 +71,14 @@ export default function TableComponent() {
   );
 
   return (
-    <ChartWrapper>
+    <Box
+      position='relative'
+      marginTop={3}
+      p={{ xs: '2', md: '4 9 4 4' }}
+      bg='#0f2e29'
+      boxShadow='0px 0px 7px rgb(0 0 0 / 20%)'
+      borderRadius={{ xs: '0', md: '2xl' }}
+    >
       <Box w='100%' mx='2' display='flex' justifyContent={'space-between'}>
         <Text fontSize='lg' fontWeight='semibold'>
           Largest Users By USD Volume
@@ -142,6 +149,6 @@ export default function TableComponent() {
           Page: {pageIndex + 1} / {pageCount} | Results: {dataLargestUsersByUsdVolume.length}
         </Box>
       </Flex>
-    </ChartWrapper>
+    </Box>
   );
 }

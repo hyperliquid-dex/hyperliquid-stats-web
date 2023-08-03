@@ -225,11 +225,9 @@ export default function Liquidity(props: any) {
     <ChartWrapper
       title='Slippage % by Trade Size'
       loading={loading}
-      data={chartData}
       controls={controls}
       zIndex={8}
       coinSelectors={coinSelectors}
-      isMobile={isMobile}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <LineChart data={chartData}>
@@ -238,13 +236,10 @@ export default function Liquidity(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
-          <YAxis
-            width={45}
-            tick={{ fill: '#f9f9f9' }}            dx={6}
-            tickFormatter={formatterPercent}
-          />
+          <YAxis width={45} tick={{ fill: '#f9f9f9' }} dx={6} tickFormatter={formatterPercent} />
           <Tooltip
             formatter={tooltipFormatter}
             labelFormatter={tooltipFormatterDate}

@@ -126,7 +126,7 @@ export default function VolumeChart(props: any) {
   }, [loading]);
 
   return (
-    <ChartWrapper title='Open Interest' loading={loading} data={formattedData} isMobile={isMobile}>
+    <ChartWrapper title='Open Interest' loading={loading}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -134,13 +134,15 @@ export default function VolumeChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
           <YAxis
             tickFormatter={yaxisFormatter}
             domain={[0, 'all']}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9' }}            dx={6}
+            tick={{ fill: '#f9f9f9' }}
+            dx={6}
           />
           <Tooltip
             formatter={tooltipFormatterCurrency}

@@ -28,7 +28,6 @@ import { getTokenColor } from '@/constants/tokens';
 import { asset_ctxs, hlp_liquidator_pnl, hlp_positions } from '@/constants/api';
 const REQUESTS = [hlp_positions, asset_ctxs, hlp_liquidator_pnl];
 
-
 export default function Hlp() {
   const [dataHlpPositions, loadingDataHlpPositions, errorDataHlpPositions] = useRequest(
     REQUESTS[0],
@@ -116,7 +115,10 @@ export default function Hlp() {
     return yyyy + '-' + mm + '-' + dd + 'T00:00:00';
   }
 
-  const makeFormattedData = (hlpPositions: HlpPosition[], hlpPnL: Map<string, HlpPnl>): [GroupedData[], string[]] => {
+  const makeFormattedData = (
+    hlpPositions: HlpPosition[],
+    hlpPnL: Map<string, HlpPnl>
+  ): [GroupedData[], string[]] => {
     const map = new Map<string, GroupedData>();
     const uniqueTopCoins = new Set<string>();
 
@@ -204,7 +206,7 @@ export default function Hlp() {
         active: dataMode === 'HEDGED',
       },
       {
-        text: 'Net notional position',
+        text: 'Net position',
         event: () => setDataMode('NET'),
         active: dataMode === 'NET',
       },
@@ -233,11 +235,7 @@ export default function Hlp() {
   }, [loading, error]);
 
   return (
-    <ChartWrapper
-      title='HLP'
-      loading={false}
-      controls={controls}
-    >
+    <ChartWrapper title='HLP' loading={false} controls={controls}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={dataMode === 'PNL' ? formattedHlpPnL : formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -245,13 +243,10 @@ export default function Hlp() {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}
+            tickMargin={10}
           />
-          <YAxis
-            tick={{ fill: '#f9f9f9' }}            dx={6}
-            width={75}
-            tickFormatter={yaxisFormatter}
-          />
+          <YAxis tick={{ fill: '#f9f9f9' }} dx={6} width={75} tickFormatter={yaxisFormatter} />
           <Tooltip
             formatter={dataMode === 'NET' ? tooltipFormatterLongShort : tooltipFormatterCurrency}
             labelFormatter={tooltipFormatterDate}
@@ -330,6 +325,7 @@ export default function Hlp() {
                 stroke={BRIGHT_GREEN}
                 dataKey='cumulativePnl'
                 name='Cumulative PnL'
+                dot={false}
               />
               <Bar
                 isAnimationActive={false}
