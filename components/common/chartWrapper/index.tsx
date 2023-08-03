@@ -121,24 +121,10 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
   );
 
   const menu = (
-    <Box
-      w={{ xs: '100%', md: '100%' }}
-      display='flex'
-      justifyContent={{ xs: 'flex-start' }}
-      mb='1rem'
-    >
-      {isMobile ? (
-        <Grid templateColumns='1fr 1fr' gap='2'>
-          {controlButtons}
-          {coinSelectorsMenu}
-        </Grid>
-      ) : (
-        <Grid templateColumns='1fr auto' gap='2'>
-          <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>
-          {coinSelectorsMenu}
-        </Grid>
-      )}
-    </Box>
+      <Grid templateColumns='1fr auto' gap='2'  marginLeft="auto">
+        {isMobile && controls ? controlButtons : <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>}
+        {coinSelectorsMenu}
+      </Grid>
   );
 
   return (
@@ -149,29 +135,18 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
         bg='#0f2e29'
         boxShadow='0px 0px 7px rgb(0 0 0 / 20%)'
         borderRadius={{ xs: '0', md: '2xl' }}
-        zIndex={zIndex}
+        zIndex={zIndex}      
       >
-        <Grid gridTemplateColumns={{ xs: '1fr', xl: '1fr auto' }} gap={4}>
-          <Box
-            w='100%'
-            mb='2'
-            display='flex'
-            justifyContent='space-between'
-            flexDirection={{ xs: 'column', lg: 'row' }}
-            gap={4}
+        <Box display="flex" flexDirection={"row"} gap={4} flexWrap={"wrap"}>
+          <Text
+            fontSize='1.2rem'
+            fontWeight='600'
+            whiteSpace={'nowrap'}
           >
-            <Text
-              display='flex'
-              w={{ xs: '100%', md: '100%' }}
-              fontSize='1.2rem'
-              fontWeight='600'
-              whiteSpace={'nowrap'}
-            >
-              {title}
-            </Text>
-          </Box>
+            {title}
+          </Text>
           {menu}
-        </Grid>
+        </Box>
         {loading && <Loader />}
         {children}
       </Box>
