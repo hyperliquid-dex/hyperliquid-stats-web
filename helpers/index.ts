@@ -63,16 +63,19 @@ interface FormatNumberOpts {
 export const formatNumberWithOptions = (value: number, opts: FormatNumberOpts = {}): string => {
   const currency = !!opts.currency;
   const compact = !!opts.compact;
+  const sign = value < 0 ? '-' : '';
+  const absoluteValue = Math.abs(value);
 
   if (currency && !compact) {
-    return getCurrencyFormatBasedOnValue(value).format(value);
+    return sign + getCurrencyFormatBasedOnValue(absoluteValue).format(absoluteValue);
   }
 
   const display = compact
-    ? formatNumberToCompactForm(value)
-    : getNumberFormatBasedOnValue(value).format(value);
+    ? formatNumberToCompactForm(absoluteValue)
+    : getNumberFormatBasedOnValue(absoluteValue).format(absoluteValue);
+
   if (currency) {
-    return `$${display}`;
+    return `${sign}$${display}`;
   }
   return display;
 };
