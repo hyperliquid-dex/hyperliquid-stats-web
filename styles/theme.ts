@@ -1,5 +1,4 @@
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-import { createBreakpoints } from '@chakra-ui/theme-tools';
 import Button from './components/button';
 import Progress from './components/progress';
 import Text from './components/text';
@@ -20,7 +19,7 @@ const breakpoints = {
   sm: '576px',
   md: '768px',
   lg: '992px',
-  xl: '1500px',
+  xl: '1400px',
   xxl: '2400px',
 };
 

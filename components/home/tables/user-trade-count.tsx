@@ -17,7 +17,6 @@ import {
 import { largest_user_trade_count } from '../../../constants/api';
 import { formatNumberWithOptions } from '../../../helpers/index';
 import { useRequest } from '@/hooks/useRequest';
-import ChartWrapper from '../../common/chartWrapper';
 import { formatAddress } from '../../../utils/formatting';
 
 const REQUESTS = [largest_user_trade_count];
@@ -81,7 +80,7 @@ export default function TableComponent() {
     >
       <Box w='100%' mx='2' display='flex' justifyContent={'space-between'}>
         <Text fontSize='lg' fontWeight='semibold'>
-          Largest Trade Count by Users
+          Largest Trade Count By Users
         </Text>
       </Box>
       <Table {...getTableProps()} variant='simple' size='md' mt='5' w='100%'>

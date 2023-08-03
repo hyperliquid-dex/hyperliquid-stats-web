@@ -1,4 +1,3 @@
-import { SetStateAction } from 'react';
 import { CoinSelector } from '../components/common/chartWrapper';
 
 const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {

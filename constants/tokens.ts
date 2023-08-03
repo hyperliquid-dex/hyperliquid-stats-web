@@ -1,7 +1,6 @@
 import * as CryptoJS from 'crypto-js';
 
 export const initialTokensSelected = [
-  'APE',
   'ARB',
   'ATOM',
   'AVAX',

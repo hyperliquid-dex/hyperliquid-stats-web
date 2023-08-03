@@ -31,16 +31,14 @@ export default function Liquidity(props: any) {
 
   const [formattedData0, setFormattedData0] = useState<any[]>([]);
   const [formattedData1000, setFormattedData1000] = useState<any[]>([]);
-  const [formattedData3000, setFormattedData3000] = useState<any[]>([]);
   const [formattedData10000, setFormattedData10000] = useState<any[]>([]);
 
   const [coinKeys, setCoinKeys] = useState<any[]>([]);
   const [coinKeys0, setCoinKeys0] = useState<any[]>([]);
   const [coinKeys1000, setCoinKeys1000] = useState<any[]>([]);
-  const [coinKeys3000, setCoinKeys3000] = useState<any[]>([]);
   const [coinKeys10000, setCoinKeys10000] = useState<any[]>([]);
 
-  const [dataMode, setDataMode] = useState<'0' | '1000' | '3000' | '10000'>('0');
+  const [dataMode, setDataMode] = useState<'0' | '1000' | '10000'>('0');
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
 
   const [dataLiqudity, loadingLiqudity, errorLiqudity] = useRequest(REQUESTS[0], [], 'chart_data');
@@ -60,11 +58,6 @@ export default function Liquidity(props: any) {
         active: dataMode === '1000',
       },
       {
-        text: '$3k',
-        event: () => setDataMode('3000'),
-        active: dataMode === '3000',
-      },
-      {
         text: '$10k',
         event: () => setDataMode('10000'),
         active: dataMode === '10000',
@@ -76,7 +69,6 @@ export default function Liquidity(props: any) {
     [key: string]: {
       median_slippage_0: number;
       median_slippage_1000: number;
-      median_slippage_3000: number;
       median_slippage_10000: number;
       time: string;
     }[];
@@ -85,7 +77,6 @@ export default function Liquidity(props: any) {
   type OutputData = {
     median_slippage_0: { time: Date; [key: string]: number | Date | string }[];
     median_slippage_1000: { time: Date; [key: string]: number | Date | string }[];
-    median_slippage_3000: { time: Date; [key: string]: number | Date | string }[];
     median_slippage_10000: { time: Date; [key: string]: number | Date | string }[];
   };
 
@@ -130,23 +121,19 @@ export default function Liquidity(props: any) {
           time,
           median_slippage_0: val_0,
           median_slippage_1000: val_1000,
-          median_slippage_3000: val_3000,
           median_slippage_10000: val_10000,
         } = record;
 
         const map0 = median_slippage_0.get(time) || { time: new Date(time), unit: '%' };
         const map1000 = median_slippage_1000.get(time) || { time: new Date(time), unit: '%' };
-        const map3000 = median_slippage_3000.get(time) || { time: new Date(time), unit: '%' };
         const map10000 = median_slippage_10000.get(time) || { time: new Date(time), unit: '%' };
 
         map0[key] = val_0 * 100;
         map1000[key] = val_1000 * 100;
-        map3000[key] = val_3000 * 100;
         map10000[key] = val_10000 * 100;
 
         median_slippage_0.set(time, map0);
         median_slippage_1000.set(time, map1000);
-        median_slippage_3000.set(time, map3000);
         median_slippage_10000.set(time, map10000);
       });
     }
@@ -154,16 +141,12 @@ export default function Liquidity(props: any) {
     return {
       median_slippage_0: Array.from(median_slippage_0.values()),
       median_slippage_1000: Array.from(median_slippage_1000.values()),
-      median_slippage_3000: Array.from(median_slippage_3000.values()),
       median_slippage_10000: Array.from(median_slippage_10000.values()),
     };
   };
 
   const extractUniqueCoins = (
-    data:
-      | OutputData['median_slippage_1000']
-      | OutputData['median_slippage_10000']
-      | OutputData['median_slippage_3000']
+    data: OutputData['median_slippage_1000'] | OutputData['median_slippage_10000']
   ): string[] => {
     const coinSet = new Set<string>();
     data.forEach((record) => {
@@ -182,16 +165,13 @@ export default function Liquidity(props: any) {
     const formattedData = transformData(dataLiqudity);
     setFormattedData0(formattedData.median_slippage_0);
     setFormattedData1000(formattedData.median_slippage_1000);
-    setFormattedData3000(formattedData.median_slippage_3000);
     setFormattedData10000(formattedData.median_slippage_10000);
     const formattedUniqueCoinKeys0 = extractUniqueCoins(formattedData.median_slippage_0);
     const formattedUniqueCoinKeys1000 = extractUniqueCoins(formattedData.median_slippage_1000);
-    const formattedUniqueCoinKeys3000 = extractUniqueCoins(formattedData.median_slippage_3000);
     const formattedUniqueCoinKeys10000 = extractUniqueCoins(formattedData.median_slippage_10000);
 
     setCoinKeys0(formattedUniqueCoinKeys0);
     setCoinKeys1000(formattedUniqueCoinKeys1000);
-    setCoinKeys3000(formattedUniqueCoinKeys3000);
     setCoinKeys10000(formattedUniqueCoinKeys10000);
   };
 
@@ -206,24 +186,16 @@ export default function Liquidity(props: any) {
       ? formattedData0
       : dataMode === '1000'
       ? formattedData1000
-      : dataMode === '3000'
-      ? formattedData3000
       : formattedData10000;
 
   const chartDataCoinKeys =
-    dataMode === '0'
-      ? coinKeys0
-      : dataMode === '1000'
-      ? coinKeys1000
-      : dataMode === '3000'
-      ? coinKeys3000
-      : coinKeys10000;
+    dataMode === '0' ? coinKeys0 : dataMode === '1000' ? coinKeys1000 : coinKeys10000;
 
   const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
 
   return (
     <ChartWrapper
-      title='Slippage % by Trade Size'
+      title='Slippage % By Trade Size'
       loading={loading}
       controls={controls}
       zIndex={8}

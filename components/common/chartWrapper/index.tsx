@@ -120,8 +120,29 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
     </Box>
   );
 
+  const menu = (
+    <Box
+      w={{ xs: '100%', md: '100%' }}
+      display='flex'
+      justifyContent={{ xs: 'flex-start' }}
+      mb='1rem'
+    >
+      {isMobile ? (
+        <Grid templateColumns='1fr 1fr' gap='2'>
+          {controlButtons}
+          {coinSelectorsMenu}
+        </Grid>
+      ) : (
+        <Grid templateColumns='1fr auto' gap='2'>
+          <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>
+          {coinSelectorsMenu}
+        </Grid>
+      )}
+    </Box>
+  );
+
   return (
-    <Box display='grid' width={{ xs: '100%', md: '100%' }} mt='3' p={{ xs: '0', md: '0 5 0 0' }}>
+    <Box display='grid' mt='3' p={{ xs: '0', md: '0 5 0 0' }}>
       <Box
         position='relative'
         p={{ xs: '2', md: '4' }}
@@ -130,13 +151,13 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
         borderRadius={{ xs: '0', md: '2xl' }}
         zIndex={zIndex}
       >
-        <Box w='100%' mb='2'>
+        <Grid gridTemplateColumns={{ xs: '1fr', xl: '1fr auto' }} gap={4}>
           <Box
             w='100%'
             mb='2'
             display='flex'
             justifyContent='space-between'
-            flexDirection={{ xs: 'column', md: 'row' }}
+            flexDirection={{ xs: 'column', lg: 'row' }}
             gap={4}
           >
             <Text
@@ -148,26 +169,9 @@ function ChartWrapper({ title, loading, controls, zIndex, coinSelectors, childre
             >
               {title}
             </Text>
-            <Box
-              w={{ xs: '100%', md: '100%' }}
-              display='flex'
-              justifyContent={{ xs: 'flex-start', md: 'center' }}
-              mb='1rem'
-            >
-              {isMobile ? (
-                <Grid templateColumns='1fr 1fr' gap='2'>
-                  {controlButtons}
-                  {coinSelectorsMenu}
-                </Grid>
-              ) : (
-                <>
-                  <ButtonGroup isAttached={true}>{controlButtons}</ButtonGroup>
-                  {coinSelectorsMenu}
-                </>
-              )}
-            </Box>
           </Box>
-        </Box>
+          {menu}
+        </Grid>
         {loading && <Loader />}
         {children}
       </Box>
