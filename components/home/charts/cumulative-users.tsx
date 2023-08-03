@@ -72,7 +72,7 @@ export default function CumulativeUsers() {
 
   return (
     <ChartWrapper title='Cumulative New Users' loading={loading}>
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <ComposedChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
           <XAxis

@@ -254,7 +254,7 @@ export default function RetailVolumeChart(props: any) {
       controls={controls}
       coinSelectors={dataMode === 'COINS' ? coinSelectors : undefined}
     >
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <ComposedChart
           data={dataMode === 'COINS' ? formattedDataCoins : formattedDataMargin}
           syncId='retailSync'

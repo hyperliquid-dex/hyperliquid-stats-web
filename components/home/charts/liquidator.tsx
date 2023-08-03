@@ -310,7 +310,7 @@ export default function LiquidatorChart(props: any) {
       zIndex={7}
       coinSelectors={dataMode === 'COINS' ? coinSelectors : undefined}
     >
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <ComposedChart data={dataModeToData(dataMode)} syncId='liquidatorSync'>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
           <XAxis

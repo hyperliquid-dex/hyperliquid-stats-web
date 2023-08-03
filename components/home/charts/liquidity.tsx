@@ -206,7 +206,7 @@ export default function Liquidity(props: any) {
       zIndex={8}
       coinSelectors={coinSelectors}
     >
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <LineChart data={chartData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
           <XAxis

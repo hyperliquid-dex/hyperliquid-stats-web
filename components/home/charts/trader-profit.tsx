@@ -102,7 +102,7 @@ export default function TradersProfitLossChart(props: any) {
 
   return (
     <ChartWrapper title='Traders Net PnL' loading={loading}>
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <ComposedChart data={data ? data.data : []}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
           <XAxis

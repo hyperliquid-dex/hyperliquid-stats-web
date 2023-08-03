@@ -127,7 +127,7 @@ export default function VolumeChart(props: any) {
 
   return (
     <ChartWrapper title='Open Interest' loading={loading}>
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
           <XAxis

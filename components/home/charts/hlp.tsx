@@ -236,7 +236,7 @@ export default function Hlp() {
 
   return (
     <ChartWrapper title='HLP' loading={false} controls={controls}>
-      <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
+      <ResponsiveContainer width='99%' height={CHART_HEIGHT}>
         <ComposedChart data={dataMode === 'PNL' ? formattedHlpPnL : formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
           <XAxis
