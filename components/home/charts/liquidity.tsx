@@ -9,9 +9,8 @@ import {
   LineChart,
 } from 'recharts';
 import { useEffect, useState } from 'react';
-import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useRequest } from '@/hooks/useRequest';
-import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
+import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT } from '../../../constants';
 import {
   tooltipFormatter,
@@ -103,10 +102,6 @@ export default function Liquidity(props: any) {
       string,
       { time: Date; [key: string]: number | Date | string }
     >();
-    const median_slippage_3000 = new Map<
-      string,
-      { time: Date; [key: string]: number | Date | string }
-    >();
     const median_slippage_10000 = new Map<
       string,
       { time: Date; [key: string]: number | Date | string }
@@ -138,10 +133,20 @@ export default function Liquidity(props: any) {
       });
     }
 
+    const sortByDate = (a: Date, b: Date) => {
+      return a.valueOf() - b.valueOf();
+    };
+
     return {
-      median_slippage_0: Array.from(median_slippage_0.values()),
-      median_slippage_1000: Array.from(median_slippage_1000.values()),
-      median_slippage_10000: Array.from(median_slippage_10000.values()),
+      median_slippage_0: Array.from(median_slippage_0.values()).sort((a, b) =>
+        sortByDate(a.time, b.time)
+      ),
+      median_slippage_1000: Array.from(median_slippage_1000.values()).sort((a, b) =>
+        sortByDate(a.time, b.time)
+      ),
+      median_slippage_10000: Array.from(median_slippage_10000.values()).sort((a, b) =>
+        sortByDate(a.time, b.time)
+      ),
     };
   };
 
@@ -238,6 +243,7 @@ export default function Liquidity(props: any) {
                 stroke={getTokenColor(coinName.toString())}
                 key={i}
                 dot={false}
+                connectNulls
               />
             );
           })}
