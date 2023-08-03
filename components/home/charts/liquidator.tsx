@@ -311,11 +311,9 @@ export default function LiquidatorChart(props: any) {
     <ChartWrapper
       title='Liquidations'
       loading={loading}
-      data={dataModeToData(dataMode)}
       controls={controls}
       zIndex={7}
-      coinSelectors={dataMode === 'COINS' ? coinSelectors : null}
-      isMobile={isMobile}
+      coinSelectors={dataMode === 'COINS' ? coinSelectors : undefined}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={dataModeToData(dataMode)} syncId='liquidatorSync'>
@@ -324,8 +322,7 @@ export default function LiquidatorChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <Tooltip
             formatter={tooltipFormatterCurrency}
@@ -395,16 +392,14 @@ export default function LiquidatorChart(props: any) {
                 tickCount={7}
                 tickFormatter={yaxisFormatter}
                 width={70}
-                tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-              />
+                tick={{ fill: '#f9f9f9' }}              />
               <YAxis
                 orientation='right'
                 yAxisId='right'
                 dataKey={'cumulative'}
                 tickFormatter={yaxisFormatter}
                 width={YAXIS_WIDTH}
-                tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-              />
+                tick={{ fill: '#f9f9f9' }}              />
               <Line
                 isAnimationActive={false}
                 type='monotone'
@@ -424,16 +419,14 @@ export default function LiquidatorChart(props: any) {
                 width={70}
                 tickFormatter={yaxisFormatter}
                 domain={pnlYDomain()}
-                tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-              />
+                tick={{ fill: '#f9f9f9' }}              />
               <YAxis
                 orientation='right'
                 yAxisId='right'
                 tickFormatter={yaxisFormatter}
                 domain={cumulativePnlYDomain()}
                 width={YAXIS_WIDTH}
-                tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-              />
+                tick={{ fill: '#f9f9f9' }}              />
               <Bar
                 isAnimationActive={false}
                 type='monotone'

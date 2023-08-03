@@ -10,9 +10,9 @@ import {
   Line,
 } from 'recharts';
 import { useEffect, useState } from 'react';
-import { Box, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useRequest } from '@/hooks/useRequest';
-import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
+import ChartWrapper from '../../common/chartWrapper';
 import {
   CHART_HEIGHT,
   YAXIS_WIDTH,
@@ -255,11 +255,9 @@ export default function RetailVolumeChart(props: any) {
     <ChartWrapper
       title='Retail Volume'
       loading={loading}
-      data={dataMode === 'COINS' ? formattedDataCoins : formattedDataMargin}
       zIndex={9}
       controls={controls}
-      coinSelectors={dataMode === 'COINS' ? coinSelectors : null}
-      isMobile={isMobile}
+      coinSelectors={dataMode === 'COINS' ? coinSelectors : undefined}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart
@@ -271,8 +269,7 @@ export default function RetailVolumeChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
             dataKey='all'
@@ -280,16 +277,14 @@ export default function RetailVolumeChart(props: any) {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <YAxis
             dataKey='cumulative'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <Tooltip
             formatter={tooltipFormatterCurrency}
             labelFormatter={tooltipLabelFormatter}

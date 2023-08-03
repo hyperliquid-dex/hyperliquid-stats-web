@@ -134,15 +134,13 @@ export default function VolumeChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
             tickFormatter={yaxisFormatter}
             domain={[0, 'all']}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            dx={6}
+            tick={{ fill: '#f9f9f9' }}            dx={6}
           />
           <Tooltip
             formatter={tooltipFormatterCurrency}

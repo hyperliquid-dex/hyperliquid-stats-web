@@ -8,10 +8,9 @@ import {
   LineChart,
   Line,
 } from 'recharts';
-import { useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
+import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT } from '../../../constants';
 import {
   tooltipFormatter,
@@ -26,9 +25,7 @@ import { funding_rate } from '../../../constants/api';
 
 const REQUESTS = [funding_rate];
 
-export default function FundingRate(props: any) {
-  const isMobile = props.isMobile;
-
+export default function FundingRate() {
   const [coinKeys, setCoinKeys] = useState<string[]>([]);
   const [formattedData, setFormattedData] = useState<GroupedFundingData[]>([]);
   const [dataFundingRate, loadingFundingRate, errorFundingRate] = useRequest(
@@ -121,9 +118,7 @@ export default function FundingRate(props: any) {
     <ChartWrapper
       title='Annualized Funding Rate'
       loading={loading}
-      data={formattedData}
       coinSelectors={coinSelectors}
-      isMobile={isMobile}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <LineChart data={formattedData}>
@@ -132,12 +127,10 @@ export default function FundingRate(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            dx={6}
+            tick={{ fill: '#f9f9f9' }}            dx={6}
             width={75}
             tickFormatter={formatterPercent}
           />

@@ -12,7 +12,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN, GREEN, RED } from '../../../constants';
 import {
@@ -25,9 +24,7 @@ import { daily_inflow, cumulative_inflow } from '../../../constants/api';
 
 const REQUESTS = [daily_inflow, cumulative_inflow];
 
-export default function CumulativeInflow(props: any) {
-  const isMobile = props.isMobile;
-
+export default function CumulativeInflow() {
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dataDailyInflow, loadingDailyInflow, errorDailyInflow] = useRequest(
     REQUESTS[0],
@@ -99,7 +96,7 @@ export default function CumulativeInflow(props: any) {
   }, [loading, errorDailyInflow]);
 
   return (
-    <ChartWrapper title='Inflows' loading={loading} data={formattedData} isMobile={isMobile}>
+    <ChartWrapper title='Inflows' loading={loading}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -107,7 +104,7 @@ export default function CumulativeInflow(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
+            tick={{ fill: '#f9f9f9' }}
             tickMargin={10}
           />
           <YAxis
@@ -116,7 +113,7 @@ export default function CumulativeInflow(props: any) {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={70}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
+            tick={{ fill: '#f9f9f9'}}
           />
           <YAxis
             dataKey='cumulative_inflow'
@@ -124,7 +121,7 @@ export default function CumulativeInflow(props: any) {
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
+            tick={{ fill: '#f9f9f9'}}
           />
           <Tooltip
             formatter={tooltipFormatterCurrency}

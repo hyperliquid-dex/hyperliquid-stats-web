@@ -11,7 +11,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN, GREEN } from '../../../constants';
 import {
@@ -24,9 +23,7 @@ import { total_accrued_fees } from '../../../constants/api';
 
 const REQUESTS = [total_accrued_fees];
 
-export default function Fees(props: any) {
-  const isMobile = props.isMobile;
-
+export default function Fees() {
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dailyFeesAccrued, loading, error] = useRequest(REQUESTS[0], [], 'chart_data');
 
@@ -69,7 +66,7 @@ export default function Fees(props: any) {
   }, [loading, error]);
 
   return (
-    <ChartWrapper title='Fees Accrued' loading={loading} data={formattedData} isMobile={isMobile}>
+    <ChartWrapper title='Fees Accrued' loading={loading}>
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={formattedData}>
           <CartesianGrid strokeDasharray='15 15' opacity={0.1} />
@@ -77,8 +74,7 @@ export default function Fees(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
             dataKey='daily_accrued_fees'
@@ -86,16 +82,14 @@ export default function Fees(props: any) {
             tickCount={7}
             tickFormatter={yaxisFormatter}
             width={70}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <YAxis
             dataKey='cumulative_accrued_fees'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatter}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <Legend wrapperStyle={{ bottom: -5 }} />
           <Bar
             isAnimationActive={false}

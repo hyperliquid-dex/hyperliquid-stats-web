@@ -1,6 +1,5 @@
 import {
   Bar,
-  Label,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,7 +13,7 @@ import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
 
-import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
+import ChartWrapper from '../../common/chartWrapper';
 import {
   CHART_HEIGHT,
   YAXIS_WIDTH,
@@ -47,8 +46,7 @@ const REQUESTS = [
   cumulative_trades,
 ];
 
-export default function VolumeChart(props: any) {
-  const isMobile = props.isMobile;
+export default function VolumeChart() {
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [dataMode, setDataMode] = useState<'COINS' | 'MARGIN' | 'USER'>('COINS');
@@ -249,17 +247,9 @@ export default function VolumeChart(props: any) {
     <ChartWrapper
       title='Number Of Trades'
       loading={loading}
-      data={
-        dataMode === 'COINS'
-          ? formattedDataCoins
-          : dataMode === 'USER'
-          ? formattedDataUsers
-          : formattedDataMarin
-      }
       controls={controls}
       zIndex={9}
-      isMobile={isMobile}
-      coinSelectors={dataMode === 'COINS' ? coinSelectors : null}
+      coinSelectors={dataMode === 'COINS' ? coinSelectors : undefined}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart
@@ -276,8 +266,7 @@ export default function VolumeChart(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            unit={''}
+            tick={{ fill: '#f9f9f9' }}            unit={''}
             tickMargin={10}
           />
           <YAxis
@@ -287,8 +276,7 @@ export default function VolumeChart(props: any) {
             domain={['0', maxAllValueUser * 1.1]}
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            unit={''}
+            tick={{ fill: '#f9f9f9' }}            unit={''}
           />
           <YAxis
             dataKey='cumulative'
@@ -296,8 +284,7 @@ export default function VolumeChart(props: any) {
             yAxisId='right'
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            unit={''}
+            tick={{ fill: '#f9f9f9' }}            unit={''}
           />
           <Tooltip
             formatter={tooltipFormatter}

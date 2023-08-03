@@ -10,8 +10,8 @@ import {
   MenuList,
   MenuItemOption,
   MenuOptionGroup,
-  useMediaQuery,
   Grid,
+  useMediaQuery,
 } from '@chakra-ui/react';
 
 interface Toggle {
@@ -32,9 +32,19 @@ const Loader = () => (
   </Box>
 );
 
-function ChartWrapper(props: any) {
-  let isMobile = props.isMobile;
-  const { title, loading, controls, zIndex, coinSelectors } = props;
+type Props =  {
+  title: string;
+  loading: boolean;
+  controls?: {
+    toggles: Toggle[],
+  };
+  zIndex?: number;
+  coinSelectors?: CoinSelector[];
+  children?: React.ReactNode;
+}
+
+function ChartWrapper({title, loading, controls, zIndex, coinSelectors, children}: Props) {
+  const isMobile = window.innerWidth < 700;
   const controlButtons =
     controls &&
     controls.toggles &&
@@ -131,7 +141,6 @@ function ChartWrapper(props: any) {
                   >
                     <MenuOptionGroup
                       type='checkbox'
-                      defaultValue={coinSelectors}
                       value={coinSelectors
                         .filter((coinSelector: CoinSelector) => coinSelector.isChecked)
                         .map((coinSelector: CoinSelector) => coinSelector.name)}
@@ -156,7 +165,7 @@ function ChartWrapper(props: any) {
           </Box>
         </Box>
         {loading && <Loader />}
-        {props.children}
+        {children}
       </Box>
     </Box>
   );

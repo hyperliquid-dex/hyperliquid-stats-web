@@ -238,13 +238,11 @@ export default function Liquidity(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
             width={45}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            dx={6}
+            tick={{ fill: '#f9f9f9' }}            dx={6}
             tickFormatter={formatterPercent}
           />
           <Tooltip

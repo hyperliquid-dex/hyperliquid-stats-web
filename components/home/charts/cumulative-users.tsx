@@ -11,7 +11,6 @@ import {
 } from 'recharts';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
-import { useMediaQuery } from '@chakra-ui/react';
 import ChartWrapper from '../../common/chartWrapper';
 import { CHART_HEIGHT, YAXIS_WIDTH, BRIGHT_GREEN, GREEN } from '../../../constants';
 import {
@@ -28,9 +27,7 @@ import {
 
 const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_by_coin];
 
-export default function CumulativeUsers(props: any) {
-  const isMobile = props.isMobile;
-
+export default function CumulativeUsers() {
   const [formattedData, setFormattedData] = useState<any[]>([]);
 
   const [dataCumulativeNewUsers, loadingCumulativeNewUsers, errorCumulativeNewUsers] = useRequest(
@@ -77,8 +74,6 @@ export default function CumulativeUsers(props: any) {
     <ChartWrapper
       title='Cumulative New Users'
       loading={loading}
-      data={formattedData}
-      isMobile={isMobile}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={formattedData}>
@@ -87,7 +82,7 @@ export default function CumulativeUsers(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
+            tick={{ fill: '#f9f9f9' }}
             tickMargin={10}
           />
           <YAxis
@@ -96,16 +91,14 @@ export default function CumulativeUsers(props: any) {
             tickCount={7}
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <YAxis
             dataKey='cumulative_new_users'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <Tooltip
             formatter={tooltipFormatter}
             labelFormatter={tooltipFormatterDate}

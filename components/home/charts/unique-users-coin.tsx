@@ -70,8 +70,7 @@ type TempGroupedTradeData = {
 
 const REQUESTS = [cumulative_new_users, daily_unique_users, daily_unique_users_by_coin];
 
-export default function UniqueUsers(props: any) {
-  const isMobile = props.isMobile;
+export default function UniqueUsers() {
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
@@ -190,9 +189,7 @@ export default function UniqueUsers(props: any) {
     <ChartWrapper
       title='Unique Users Percentage By Coin'
       loading={loading}
-      data={formattedData}
       zIndex={8}
-      isMobile={isMobile}
       coinSelectors={coinSelectors}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
@@ -202,8 +199,7 @@ export default function UniqueUsers(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
             domain={[0, 'auto']}
@@ -211,16 +207,14 @@ export default function UniqueUsers(props: any) {
             tickCount={undefined}
             tickFormatter={yaxisFormatterPercent}
             width={55}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <YAxis
             dataKey='daily_unique_users'
             orientation='right'
             yAxisId='right'
             tickFormatter={yaxisFormatterNumber}
             width={YAXIS_WIDTH}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-          />
+            tick={{ fill: '#f9f9f9' }}          />
           <Tooltip
             formatter={tooltipFormatter}
             labelFormatter={tooltipFormatterDate}

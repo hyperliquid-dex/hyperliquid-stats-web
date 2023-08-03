@@ -10,7 +10,7 @@ import {
   Line,
   ComposedChart,
 } from 'recharts';
-import { Box, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
 
@@ -28,13 +28,8 @@ import { getTokenColor } from '@/constants/tokens';
 import { asset_ctxs, hlp_liquidator_pnl, hlp_positions } from '@/constants/api';
 const REQUESTS = [hlp_positions, asset_ctxs, hlp_liquidator_pnl];
 
-const DAY = 60 * 60 * 24 * 1000;
 
-type Props = {isMobile: boolean}; 
-
-export default function Hlp(props: any) {
-  const isMobile = props.isMobile; 
-  
+export default function Hlp() {
   const [dataHlpPositions, loadingDataHlpPositions, errorDataHlpPositions] = useRequest(
     REQUESTS[0],
     [],
@@ -241,9 +236,7 @@ export default function Hlp(props: any) {
     <ChartWrapper
       title='HLP'
       loading={false}
-      data={formattedData}
       controls={controls}
-      isMobile={isMobile}
     >
       <ResponsiveContainer width='100%' height={CHART_HEIGHT}>
         <ComposedChart data={dataMode === 'PNL' ? formattedHlpPnL : formattedData}>
@@ -252,12 +245,10 @@ export default function Hlp(props: any) {
             dataKey='time'
             tickFormatter={xAxisFormatter}
             minTickGap={30}
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            tickMargin={10}
+            tick={{ fill: '#f9f9f9' }}            tickMargin={10}
           />
           <YAxis
-            tick={{ fill: '#f9f9f9', fontSize: isMobile ? 14 : 15 }}
-            dx={6}
+            tick={{ fill: '#f9f9f9' }}            dx={6}
             width={75}
             tickFormatter={yaxisFormatter}
           />
