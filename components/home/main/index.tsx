@@ -25,9 +25,9 @@ const Main = () => {
   useEffect(() => {
     if (process.env.NEXT_PUBLIC_MIXPANEL_TOKEN) {
       mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL_TOKEN, {
-        api_host: "https://metrics.hyperliquid.xyz",
+        api_host: 'https://metrics.hyperliquid.xyz',
       });
-      mixpanel.track("Stats Loaded");
+      mixpanel.track('Stats Loaded');
     }
   }, []);
   return (

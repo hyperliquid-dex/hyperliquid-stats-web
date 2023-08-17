@@ -9,7 +9,6 @@ import {
   ComposedChart,
   Line,
 } from 'recharts';
-import { Box, Text, useMediaQuery } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
 
@@ -376,11 +375,6 @@ export default function VolumeChart() {
           />
         </ComposedChart>
       </ResponsiveContainer>
-      <Box w='100%' mt='3'>
-        {dataMode === 'COINS' && (
-          <Text color='#bbb'>Top 10 Coins grouped daily and remaining coins grouped by Other</Text>
-        )}
-      </Box>
     </ChartWrapper>
   );
 }

@@ -346,11 +346,6 @@ export default function Hlp() {
         </ComposedChart>
       </ResponsiveContainer>
       <Box w='100%' mt='3'>
-        {dataMode === 'COINS' && (
-          <Text color='#bbb'>Top 10 Coins grouped daily and remaining coins grouped by Other</Text>
-        )}
-      </Box>
-      <Box w='100%' mt='3'>
         {dataMode === 'PNL' && <Text color='#bbb'>PNL over time</Text>}
       </Box>
 

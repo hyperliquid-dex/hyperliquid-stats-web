@@ -12,7 +12,6 @@ import {
 import { useEffect, useState } from 'react';
 import { useRequest } from '@/hooks/useRequest';
 
-import { Box, Text } from '@chakra-ui/react';
 import ChartWrapper from '../../common/chartWrapper';
 import { BRIGHT_GREEN, CHART_HEIGHT, YAXIS_WIDTH } from '../../../constants';
 import {
@@ -185,18 +184,13 @@ export default function TotalVolumeChart() {
               borderRadius: '26px',
               maxHeight: '500px',
             }}
+            position={{ y: -100 }}
             itemSorter={(item) => {
               return Number(item.value) * -1;
             }}
           />
         </ComposedChart>
       </ResponsiveContainer>
-      <Box w='100%' mt='3'>
-        <Text color='#bbb'>
-          Top 10 Coins grouped daily and remaining coins grouped by Other. Volume tracked since
-          introduction of fees on 6/13/2023.
-        </Text>
-      </Box>
     </ChartWrapper>
   );
 }

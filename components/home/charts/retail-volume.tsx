@@ -293,6 +293,7 @@ export default function RetailVolumeChart(props: any) {
               boxShadow: '0px 0px 7px rgb(0 0 0 / 20%)',
               borderRadius: '26px',
               color: '#fff',
+              maxHeight: '500px',
             }}
             itemSorter={(item) => {
               return Number(item.value) * -1;
