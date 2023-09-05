@@ -96,7 +96,6 @@ export default function TotalVolumeChart() {
       entry.Other = otherTotal;
     });
 
-    console.log('***', Array.from(uniqueCoins));
     const result = Array.from(map.values());
     return [result, Array.from(uniqueCoins)];
   };
