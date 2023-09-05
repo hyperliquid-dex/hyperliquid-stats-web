@@ -1,6 +1,12 @@
 import { CoinSelector } from '../components/common/chartWrapper';
 
 const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
+  if (a.name === "All") {
+    return -1;
+  }
+  if (b.name === "All") {
+    return 1;
+  }
   if (a.isChecked !== b.isChecked) {
     return a.isChecked ? -1 : 1;
   }

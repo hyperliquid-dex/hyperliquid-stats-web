@@ -9,10 +9,10 @@ import {
   Line,
 } from 'recharts';
 import { useEffect, useState } from 'react';
-import { Box, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useRequest } from '@/hooks/useRequest';
-import ChartWrapper, { CoinSelector } from '../../common/chartWrapper';
-import { BRIGHT_GREEN, CHART_HEIGHT, GREEN, YAXIS_WIDTH } from '../../../constants';
+import ChartWrapper from '../../common/chartWrapper';
+import { BRIGHT_GREEN, CHART_HEIGHT, YAXIS_WIDTH } from '../../../constants';
 import {
   xAxisFormatter,
   yaxisFormatter,
@@ -28,7 +28,8 @@ const REQUESTS = [open_interest];
 
 export default function OpenInterestChart() {
   const [coins, setCoins] = useState<any[]>([]);
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
+  const initialTokensSelected = [ ...initialTokensSelectedWithOther, 'All']
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
   const [dataOpenInterest, loadingOpenInterest, errorOpenInterest] = useRequest(
@@ -44,7 +45,7 @@ export default function OpenInterestChart() {
   type GroupedOpenInterestData = {
     time: Date;
     unit: string;
-    all: number;
+    All: number;
     [key: string]: number | Date | string;
   };
 
@@ -58,13 +59,13 @@ export default function OpenInterestChart() {
       if (!map.has(key)) {
         map.set(key, {
           time: new Date(key),
-          all: 0,
+          All: 0,
           unit: '$',
         });
       }
       const existingEntry = map.get(key);
       existingEntry[item.coin] = (existingEntry[item.coin] || 0) + item.open_interest;
-      existingEntry.all += item.open_interest;
+      existingEntry.All += item.open_interest;
 
       totalOpenInterestMap.set(
         item.coin,
@@ -80,8 +81,7 @@ export default function OpenInterestChart() {
           key !== 'cumulative' &&
           key !== 'other' &&
           key !== 'unit' &&
-          key !== 'Other' &&
-          key !== 'all'
+          key !== 'Other'
       );
       coinEntries.forEach(([coin]) => uniqueCoins.add(coin));
     });
@@ -123,7 +123,7 @@ export default function OpenInterestChart() {
           />
           <YAxis
             tickFormatter={yaxisFormatter}
-            domain={[0, 'all']}
+            domain={[0, 'All']}
             width={YAXIS_WIDTH}
             tick={{ fill: '#f9f9f9' }}
             dx={6}
@@ -152,21 +152,12 @@ export default function OpenInterestChart() {
                 isAnimationActive={false}
                 dataKey={coinName}
                 dot={false}
-                name={coinName.toString()}
-                stroke={getTokenColor(coinName.toString())}
+                name={coinName === "All" ? 'Total open interest': coinName.toString()}
+                stroke={coinName === "All" ? BRIGHT_GREEN: getTokenColor(coinName.toString())}
                 key={'open-i-rate-line-' + i}
               />
             );
           })}
-          <Line
-            unit={''}
-            isAnimationActive={false}
-            dataKey={'all'}
-            dot={false}
-            name={'Total open interest'}
-            stroke={BRIGHT_GREEN}
-            key={'total-open-interest'}
-          />
         </LineChart>
       </ResponsiveContainer>
       <Box w='100%' mt='3'>

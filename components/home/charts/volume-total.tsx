@@ -83,8 +83,7 @@ export default function TotalVolumeChart() {
           key !== 'total' &&
           key !== 'cumulative' &&
           key !== 'other' &&
-          key !== 'unit' &&
-          key !== 'Other'
+          key !== 'unit'
       );
       const otherCoins = coinEntries.filter(
         ([coin]) => !CoinsSelected.includes(coin) && coin !== 'all'
