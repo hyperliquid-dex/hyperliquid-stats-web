@@ -1,10 +1,10 @@
 import { CoinSelector } from '../components/common/chartWrapper';
 
-const coinSelectorsSort = (a: CoinSelector, b: CoinSelector) => {
-  if (a.name === "All") {
+const coinSelectorsSort = (a: CoinSelector, b: CoinSelector, specialKey?: string) => {
+  if (a.name === specialKey) {
     return -1;
   }
-  if (b.name === "All") {
+  if (b.name === specialKey) {
     return 1;
   }
   if (a.isChecked !== b.isChecked) {
@@ -18,7 +18,8 @@ export const createCoinSelectors = (
   coinsSelected: string[],
   setCoinsSelected: (arg: string[]) => any,
   formatData: ((arg: string[]) => any) | (() => any),
-  noOtherOption?: boolean
+  noOtherOption?: boolean,
+  specialKey?: string
 ) => {
   const emptySelection = noOtherOption ? [] : ['Other'];
   const deselectAll = {
@@ -54,7 +55,7 @@ export const createCoinSelectors = (
     };
   });
 
-  const sortedCoinSelectors = coinSelectors.sort((a, b) => coinSelectorsSort(a, b));
+  const sortedCoinSelectors = coinSelectors.sort((a, b) => coinSelectorsSort(a, b, specialKey));
 
   return [deselectAll, ...sortedCoinSelectors];
 };

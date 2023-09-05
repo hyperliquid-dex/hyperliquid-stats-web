@@ -28,7 +28,7 @@ const REQUESTS = [open_interest];
 
 export default function OpenInterestChart() {
   const [coins, setCoins] = useState<any[]>([]);
-  const initialTokensSelected = [ ...initialTokensSelectedWithOther, 'All']
+  const initialTokensSelected = [...initialTokensSelectedWithOther, 'All'];
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
 
   const [formattedData, setFormattedData] = useState<any[]>([]);
@@ -106,7 +106,8 @@ export default function OpenInterestChart() {
     coinsSelected,
     setCoinsSelected,
     formatData,
-    true
+    true,
+    'All'
   );
 
   return (
@@ -152,8 +153,8 @@ export default function OpenInterestChart() {
                 isAnimationActive={false}
                 dataKey={coinName}
                 dot={false}
-                name={coinName === "All" ? 'Total open interest': coinName.toString()}
-                stroke={coinName === "All" ? BRIGHT_GREEN: getTokenColor(coinName.toString())}
+                name={coinName === 'All' ? 'Total open interest' : coinName.toString()}
+                stroke={coinName === 'All' ? BRIGHT_GREEN : getTokenColor(coinName.toString())}
                 key={'open-i-rate-line-' + i}
               />
             );
