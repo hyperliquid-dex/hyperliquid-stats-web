@@ -29,8 +29,7 @@ const REQUESTS = [total_volume];
 
 export default function TotalVolumeChart() {
   const [formattedData, setFormattedData] = useState<any[]>([]);
-  const initialTokensSelected = [...initialTokensSelectedWithOther, 'Cumulative'];
-  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
+  const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelectedWithOther);
   const [coins, setCoins] = useState<string[]>([]);
   const [dataTotalVolume, loading, error] = useRequest(REQUESTS[0], [], 'chart_data');
 
