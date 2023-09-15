@@ -22,6 +22,7 @@ import { createCoinSelectors } from '../../../helpers/utils';
 
 import { getTokenColor, initialTokensSelected } from '../../../constants/tokens';
 import { liquidity_by_coin } from '../../../constants/api';
+import { Box, Text } from '@chakra-ui/react';
 
 const REQUESTS = [liquidity_by_coin];
 
@@ -39,7 +40,7 @@ export default function Liquidity() {
   const [coinKeys30000, setCoinKeys30000] = useState<any[]>([]);
   const [coinKeys100000, setCoinKeys100000] = useState<any[]>([]);
 
-  const [dataMode, setDataMode] = useState<'0' | '1000' | '10000'| '30000'| '100000'>('0');
+  const [dataMode, setDataMode] = useState<'0' | '1000' | '10000' | '30000' | '100000'>('0');
   const [coinsSelected, setCoinsSelected] = useState<string[]>(initialTokensSelected);
 
   const [dataLiqudity, loadingLiqudity, errorLiqudity] = useRequest(REQUESTS[0], [], 'chart_data');
@@ -107,7 +108,9 @@ export default function Liquidity() {
     // Filter data for each category by top 10 coins
     const filteredData: InputData = {};
     for (let coin of coinsSelected) {
-      filteredData[coin] = data[coin];
+      if (coinsSelected.includes(coin)) {
+        filteredData[coin] = data[coin];
+      }
     }
 
     const median_slippage_0 = new Map<
@@ -123,13 +126,13 @@ export default function Liquidity() {
       { time: Date; [key: string]: number | Date | string }
     >();
     const median_slippage_30000 = new Map<
-    string,
-    { time: Date; [key: string]: number | Date | string }
-  >();
-  const median_slippage_100000 = new Map<
-  string,
-  { time: Date; [key: string]: number | Date | string }
->();
+      string,
+      { time: Date; [key: string]: number | Date | string }
+    >();
+    const median_slippage_100000 = new Map<
+      string,
+      { time: Date; [key: string]: number | Date | string }
+    >();
 
     for (let key in filteredData) {
       if (!filteredData[key]) {
@@ -143,7 +146,6 @@ export default function Liquidity() {
           median_slippage_10000: val_10000,
           median_slippage_30000: val_30000,
           median_slippage_100000: val_100000,
-
         } = record;
 
         const map0 = median_slippage_0.get(time) || { time: new Date(time), unit: '%' };
@@ -163,7 +165,6 @@ export default function Liquidity() {
         median_slippage_10000.set(time, map10000);
         median_slippage_30000.set(time, map30000);
         median_slippage_100000.set(time, map100000);
-
       });
     }
 
@@ -182,11 +183,11 @@ export default function Liquidity() {
         sortByDate(a.time, b.time)
       ),
       median_slippage_30000: Array.from(median_slippage_30000.values()).sort((a, b) =>
-      sortByDate(a.time, b.time)
-    ),
-    median_slippage_100000: Array.from(median_slippage_100000.values()).sort((a, b) =>
-    sortByDate(a.time, b.time)
-  ),
+        sortByDate(a.time, b.time)
+      ),
+      median_slippage_100000: Array.from(median_slippage_100000.values()).sort((a, b) =>
+        sortByDate(a.time, b.time)
+      ),
     };
   };
 
@@ -231,7 +232,7 @@ export default function Liquidity() {
     if (!loading && !error) {
       formatData();
     }
-  }, [loading]);
+  }, [loading, coinKeys]);
 
   let chartData;
   let chartDataCoinKeys;
@@ -258,11 +259,17 @@ export default function Liquidity() {
       break;
   }
 
-  const coinSelectors = createCoinSelectors(coinKeys, coinsSelected, setCoinsSelected, formatData);
+  const coinSelectors = createCoinSelectors(
+    coinKeys,
+    coinsSelected,
+    setCoinsSelected,
+    formatData,
+    true
+  );
 
   return (
     <ChartWrapper
-      title='Slippage % By Trade Size'
+      title='Slippage'
       loading={loading}
       controls={controls}
       zIndex={8}
@@ -295,7 +302,7 @@ export default function Liquidity() {
             }}
           />
           <Legend wrapperStyle={{ bottom: -5 }} />
-          {chartDataCoinKeys.map((coinName, i) => {
+          {coinsSelected.map((coinName, i) => {
             return (
               <Line
                 isAnimationActive={false}
@@ -311,6 +318,9 @@ export default function Liquidity() {
           })}
         </LineChart>
       </ResponsiveContainer>
+      <Box w='100%' mt='3'>
+        <Text color='#bbb'>Slippage percentage by tade size.</Text>
+      </Box>
     </ChartWrapper>
   );
 }
