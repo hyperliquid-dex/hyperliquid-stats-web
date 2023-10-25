@@ -61,6 +61,7 @@ export default function Hlp() {
     coin: string;
     avg_oracle_px: number;
     first_oracle_px: number;
+    last_oracle_px: number;
     avg_open_interest: number;
   };
 
@@ -77,12 +78,15 @@ export default function Hlp() {
     hedged_pnl: number;
   };
 
-  const getOraclePxs = (assetCtxs: AssetCtx[]): Map<string, number> => {
-    const map = new Map<string, number>();
+  const getOraclePxs = (assetCtxs: AssetCtx[]): {firstOraclePxs: Map<string, number>, lastOraclePxs: Map<string, number>} => {
+    const firstOraclePxs = new Map<string, number>();
+    const lastOraclePxs = new Map<string, number>();
+
     assetCtxs.forEach((item) => {
-      map.set(item.coin + item.time, item.first_oracle_px);
+      firstOraclePxs.set(item.coin + item.time, item.first_oracle_px);
+      lastOraclePxs.set(item.coin + item.time, item.last_oracle_px)
     });
-    return map;
+    return {firstOraclePxs, lastOraclePxs};
   };
 
   const makeHlpPnl = (
@@ -122,9 +126,8 @@ export default function Hlp() {
     const map = new Map<string, GroupedData>();
     const uniqueTopCoins = new Set<string>();
 
-    let prevTime: string | null = null;
     let hedgedCumulativePnl = 0;
-    const oraclePxs = getOraclePxs(assetCtxs);
+    const {firstOraclePxs, lastOraclePxs} = getOraclePxs(assetCtxs);
 
     hlpPositions.forEach((item: HlpPosition) => {
       let { time, coin, daily_ntl } = item;
@@ -138,23 +141,20 @@ export default function Hlp() {
           hedged_cumulative_pnl: hedgedCumulativePnl,
           Other: 0,
         });
-        prevTime = time;
       }
 
       const existingEntry = map.get(time)!;
       existingEntry[`${coin}`] = (existingEntry[`${coin}`] || 0) + daily_ntl;
       existingEntry.daily_ntl += daily_ntl;
 
-      const oraclePx = oraclePxs.get(coin + time);
+      const firstOraclePx = firstOraclePxs.get(coin + time);
       let hedgedPnl = 0;
-      const nextTime = getNextTime(time);
-      let oraclePxNext = oraclePxs.get(coin + nextTime);
-      let prevTimeData = prevTime ? map.get(prevTime) : null;
-      let prevDayNtlPosition = prevTimeData ? prevTimeData[`${coin}`] : null;
-
-      if (oraclePxNext && oraclePx && prevDayNtlPosition) {
-        const pxChange = 1 - oraclePx / oraclePxNext;
-        const pnl = -1 * prevDayNtlPosition * pxChange;
+      let lastOraclePx = lastOraclePxs.get(coin + time);
+      let curDayData = map.get(time);
+      let coinNtlPosition = curDayData ? curDayData[`${coin}`] : null;
+      if (lastOraclePx && firstOraclePx && coinNtlPosition) {
+        const pxChange = 1 - firstOraclePx / lastOraclePx;
+        const pnl = -1 * coinNtlPosition * pxChange;
         hedgedPnl += pnl;
       }
 
