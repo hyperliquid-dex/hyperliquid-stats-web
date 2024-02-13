@@ -182,7 +182,7 @@ export default function UniqueUsers() {
 
   return (
     <ChartWrapper
-      title='Unique Users Percentage By Coin'
+      title='Unique Traders Percentage By Coin'
       loading={loading}
       zIndex={8}
       coinSelectors={coinSelectors}
@@ -252,15 +252,15 @@ export default function UniqueUsers() {
             stroke={BRIGHT_GREEN}
             dataKey='daily_unique_users'
             yAxisId='right'
-            name='Daily Unique Users'
+            name='Daily Unique Traders'
           />
         </ComposedChart>
       </ResponsiveContainer>
       <Box w='100%' mt='3'>
         <Text color='#bbb'>
-          The line is the number of unique addresses who used Hyperliquid each day, bars represent
-          proportion of users who traded specific coins. Total exceeds 100% as users can trade
-          multiple coins. Top 10 coins are shown separately and the rest are grouped as Other.
+           The line is the number of unique addresses who traded on Hyperliquid each day, bars represent
+           proportion of users who traded specific coins. Total exceeds 100% as users can trade
+           multiple coins. Top 10 coins are shown separately and the rest are grouped as Other.
         </Text>
       </Box>
     </ChartWrapper>

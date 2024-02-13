@@ -185,7 +185,7 @@ export const yaxisFormatterNumber = (value: number): string => {
 };
 
 export const yaxisFormatter = (value: number): string => {
-  return formatNumberWithOptions(value, { currency: true, compact: true }, 0);
+  return formatNumberWithOptions(value, { currency: true, compact: true });
 };
 
 export const tooltipFormatterNumber = (value: number | string): string => {
