@@ -362,7 +362,7 @@ export default function RetailVolumeChart() {
       <Box w='100%' mt='3'>
         <Text color='#bbb'>
         This measures two-sided volume, i.e. each side of a trade is counted once if that side is retail.
-        This previously tracked retail volume, but was changed in February, 2024 to non-HLP volume.
+        This previously tracked retail volume, but was changed in February 2024 to non-HLP volume.
         </Text>
       </Box>
     </ChartWrapper>

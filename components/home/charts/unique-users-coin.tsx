@@ -260,7 +260,7 @@ export default function UniqueUsers() {
         <Text color='#bbb'>
            The line is the number of unique addresses who traded on Hyperliquid each day, bars represent
            proportion of users who traded specific coins. Total exceeds 100% as users can trade
-           multiple coins. Top 10 coins are shown separately and the rest are grouped as Other.
+           multiple coins.
         </Text>
       </Box>
     </ChartWrapper>

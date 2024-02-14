@@ -346,10 +346,6 @@ export default function Hlp() {
         </ComposedChart>
       </ResponsiveContainer>
       <Box w='100%' mt='3'>
-        {dataMode === 'PNL' && <Text color='#bbb'>PNL over time</Text>}
-      </Box>
-
-      <Box w='100%' mt='3'>
         {dataMode === 'HEDGED' && (
           <Text color='#bbb'>
             Hedge each day&apos;s returns by holding the previous day&apos;s ending positions for

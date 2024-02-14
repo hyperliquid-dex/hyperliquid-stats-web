@@ -319,7 +319,7 @@ export default function Liquidity() {
         </LineChart>
       </ResponsiveContainer>
       <Box w='100%' mt='3'>
-        <Text color='#bbb'>Slippage percentage by tade size.</Text>
+        <Text color='#bbb'>Slippage percentage by trade size.</Text>
       </Box>
     </ChartWrapper>
   );

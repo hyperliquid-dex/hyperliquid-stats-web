@@ -161,11 +161,6 @@ export default function OpenInterestChart() {
           })}
         </LineChart>
       </ResponsiveContainer>
-      <Box w='100%' mt='3'>
-        <Text color='#bbb'>
-          Top 10 Coins grouped by total volume over time and remaining coins grouped by Other
-        </Text>
-      </Box>
     </ChartWrapper>
   );
 }
