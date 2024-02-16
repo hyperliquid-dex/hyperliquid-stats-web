@@ -7,6 +7,9 @@ export function getTokenColor(token: string): string {
   if (token == 'Other') {
     return 'pink';
   }
+  if (token == 'SOL') {
+    return 'orange';
+  }
   // Use the CryptoJS library to get the MD5 hash of the string
   let hash = CryptoJS.MD5('col' + token);
 
