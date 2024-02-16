@@ -1,16 +1,6 @@
 import * as CryptoJS from 'crypto-js';
 
-export const initialTokensSelected = [
-  'ARB',
-  'ATOM',
-  'AVAX',
-  'BNB',
-  'BTC',
-  'COMP',
-  'CRV',
-  'DOGE',
-  'ETH',
-];
+export const initialTokensSelected = ['BTC', 'ETH', 'SOL'];
 export const initialTokensSelectedWithOther = [...initialTokensSelected, 'Other'];
 
 export function getTokenColor(token: string): string {
