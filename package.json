@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
     "lint": "npx eslint . --fix",
     "prettify": "npx prettier --write ."
   },
@@ -73,6 +73,8 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "ethers": "^5.7.2",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
     "framer-motion": "^10.12.16",
     "lodash": "^4.17.21",
     "mixpanel-browser": "^2.47.0",
@@ -80,6 +82,7 @@
     "next": "^13.4.4",
     "polished": "^4.2.2",
     "prettier": "^3.0.0",
+    "rate-limiter-flexible": "^5.0.3",
     "react": "18.2.0",
     "react-date-range": "^1.4.0",
     "react-dom": "18.2.0",

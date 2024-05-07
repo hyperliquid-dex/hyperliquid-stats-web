@@ -29,7 +29,8 @@ export const DataContextProvider = (props: any) => {
 
   const initState: State = {
     dates: {
-      from: '2023-06-14',
+      // from: '2023-06-14',
+      from: '2024-03-11',
       to: DATE_TO,
     },
     setDates: setDates,

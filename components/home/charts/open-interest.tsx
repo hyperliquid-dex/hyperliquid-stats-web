@@ -161,6 +161,11 @@ export default function OpenInterestChart() {
           })}
         </LineChart>
       </ResponsiveContainer>
+      <Box w='100%' mt='3'>
+        <Text color='#bbb'>
+		Before March 22, 2024, this showed one-sided open interest. It now shows two-sided open interest to address user confusion.
+        </Text>
+      </Box>
     </ChartWrapper>
   );
 }
