@@ -1,53 +1,44 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { DataContext } from '../contexts/data';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export function useRequest(url: string, defaultValue: any, key?: string, dontRefetch?: boolean) {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<any>();
   const [data, setData] = useState(defaultValue);
   const dataContext = useContext(DataContext);
-  const urlHasParams = url.indexOf('?') !== -1;
 
-  let params = '';
-  if (dataContext.dates.from) {
-    if (!urlHasParams) {
-      params += '?';
-    }
-    if (urlHasParams) {
-      params += '&';
-    }
-    params += `start_date=${dataContext.dates.from}`;
-  }
-  if (dataContext.dates.to) {
-    params += `&end_date=${dataContext.dates.to}`;
-  }
-
-  const init = async () => {
-    try {
-      setLoading(true);
-      const data = await fetcher(`${process.env.NEXT_PUBLIC_API_URL}${url}${params}`);
-      if (key && data[key]) {
-        setData(data[key]);
-      } else {
-        setData(data);
-      }
-    } catch (error) {
-      console.error(error);
-      setError(error);
-    }
+  const init = useCallback(async () => {
+    setLoading(true);
+    const data = await fetcher(`${process.env.NEXT_PUBLIC_DAT_URL}/${url}`);
+    const dataFromKey = key ? data[key] : data?.table_data || data?.chart_data || data;
+    setData(
+      dataFromKey.filter
+        ? dataFromKey.filter((line: any) => {
+            if (!line.time) {
+              return true;
+            }
+            if (dataContext.dates.from && new Date(line.time) < new Date(dataContext.dates.from)) {
+              return false;
+            }
+            if (dataContext.dates.to && new Date(line.time) > new Date(dataContext.dates.to)) {
+              return false;
+            }
+            return true;
+          })
+        : dataFromKey
+    );
     setLoading(false);
-  };
+  }, [dataContext.dates.from, dataContext.dates.to, key, url]);
 
   useEffect(() => {
     init();
-  }, [url]);
+  }, [init, url]);
 
   useEffect(() => {
     if (dontRefetch) return;
     init();
-  }, [dataContext.dates.from, dataContext.dates.to]);
+  }, [dataContext.dates.from, dataContext.dates.to, dontRefetch, init]);
 
-  return [data, loading, error];
+  return [data, loading];
 }
