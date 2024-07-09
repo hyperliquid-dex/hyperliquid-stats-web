@@ -20,6 +20,30 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Using Docker Compose for Development
+
+To simplify the setup and ensure consistency across different development environments, you can use Docker Compose to run the project. This method requires Docker and Docker Compose to be installed on your machine.
+
+1. Build the Docker images:
+
+```bash
+docker-compose build
+```
+
+2. Start the services:
+
+```bash
+docker-compose up -d
+```
+
+This will start the Next.js development server and any other services defined in your `docker-compose.yml`, such as Nginx or a database, making them accessible via `http://localhost:3002` or another port specified in your Docker Compose configuration.
+
+To stop the services, use:
+
+```bash
+docker-compose down
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
